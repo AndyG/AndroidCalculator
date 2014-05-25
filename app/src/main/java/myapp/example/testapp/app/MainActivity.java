@@ -26,7 +26,6 @@ public class MainActivity extends Activity {
         Log.w("debugMessage", "created main activity");
         startedTypingNumber = false;
         startedBuildingExpression=false;
-        currentOperandDisplay = (TextView)findViewById(R.id.currentOperandDisplay);
         currentExpressionDisplay = (TextView)findViewById(R.id.currentExpressionDisplay);
         resultDisplay = (TextView)findViewById(R.id.resultDisplay);
         resultDisplay.setVisibility(View.GONE);
@@ -57,11 +56,9 @@ public class MainActivity extends Activity {
     public void updateDisplays(){
         String[] currentCalculatorState = calculator.getStringValues();
         if(currentCalculatorState[0]!=null)
-            currentOperandDisplay.setText(currentCalculatorState[0]);
-        if(currentCalculatorState[1]!=null)
-            currentExpressionDisplay.setText(currentCalculatorState[1]);
-        if(currentCalculatorState[2]!=null){
-            resultDisplay.setText(currentCalculatorState[2]);
+            currentExpressionDisplay.setText(currentCalculatorState[0]);
+        if(currentCalculatorState[1]!=null){
+            resultDisplay.setText(currentCalculatorState[1]);
         }else{
             resultDisplay.setText("");
         }
