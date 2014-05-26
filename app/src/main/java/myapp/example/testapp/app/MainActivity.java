@@ -58,7 +58,11 @@ public class MainActivity extends Activity {
         if(currentCalculatorState[0]!=null)
             currentExpressionDisplay.setText(currentCalculatorState[0]);
         if(currentCalculatorState[1]!=null){
-            resultDisplay.setText(currentCalculatorState[1]);
+            String result = currentCalculatorState[1];
+            if(result.length()>8) {
+                result = currentCalculatorState[1].substring(0,8);
+            }
+            resultDisplay.setText(result);
         }else{
             resultDisplay.setText("");
         }

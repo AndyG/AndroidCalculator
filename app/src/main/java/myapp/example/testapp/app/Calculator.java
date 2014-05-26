@@ -9,10 +9,6 @@ public class Calculator {
     private StructuredExpression currentStructuredExpression;
     private String lastResult;
 
-    //state of calculator
-    private Boolean startedTypingNumber;
-    private Boolean startedBuildingExpression;
-
     /**
      * Evaluates the current expression in the calculator and returns a string representing the answer.
      */
@@ -47,25 +43,21 @@ public class Calculator {
      * Otherwise, append this number to the currentExpression.
      */
     public void pressNumber(String num){
-        if(startedTypingNumber && currentStructuredExpression.currentlyTypingNumber()){
+        if(currentStructuredExpression.currentlyTypingNumber()){
             currentStructuredExpression.updateLastOperand(num);
         }else{
             currentStructuredExpression.addExpressionBlock("operand",num);
-            startedTypingNumber = true;
         }
     }
 
     public void pressOperation(String op){
         currentStructuredExpression.addExpressionBlock("operator",op);
-        startedTypingNumber = false;
     }
 
     public void pressEquals(){
         String expressionToEvaluate = currentStructuredExpression.toString();
         System.out.println("Evaluating: "+expressionToEvaluate);
         lastResult = evaluateCurrentExpression();
-        startedTypingNumber=false;
-        startedBuildingExpression=false;
     }
 
     public void pressNegate(){
@@ -81,8 +73,6 @@ public class Calculator {
     public void pressClear(){
         currentStructuredExpression = new StructuredExpression();
         lastResult = null;
-        startedTypingNumber=false;
-        startedBuildingExpression=false;
     }
 
     /**
@@ -101,8 +91,6 @@ public class Calculator {
      */
     public Calculator(){
         lastResult=null;
-        startedBuildingExpression = false;
-        startedTypingNumber = false;
         currentStructuredExpression = new StructuredExpression();
     }
 }
