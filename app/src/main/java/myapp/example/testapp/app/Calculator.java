@@ -8,6 +8,7 @@ import net.sourceforge.jeval.*;
 public class Calculator {
     private StructuredExpression currentStructuredExpression;
     private String lastResult;
+    private Boolean displayingSuccessfulResult;
 
     /**
      * Evaluates the current expression in the calculator and returns a string representing the answer.
@@ -24,18 +25,21 @@ public class Calculator {
         }catch(EvaluationException e){
             e.printStackTrace();
             lastResult = "Invalid Expression";
+            displayingSuccessfulResult = false;
             return lastResult;
         }
 
         //if the result is an integer, trim off the '.0'
         //remember this as the last result
-        if(res.equals(res.intValue())){
+        if(res.doubleValue()==res.intValue()){
+            displayingSuccessfulResult = true;
             String result = Integer.toString(res.intValue());
             lastResult = result;
-            return(result);
+            return("="+result);
         }else{
+            displayingSuccessfulResult = true;
             lastResult = res.toString();
-            return(res.toString());
+            return("="+res.toString());
         }
     }
 
@@ -45,40 +49,59 @@ public class Calculator {
      * Otherwise, append this number to the currentExpression.
      */
     public void pressNumber(String num){
+        if(displayingSuccessfulResult){
+            currentStructuredExpression = new StructuredExpression();
+        }
         if(currentStructuredExpression.currentlyTypingNumber()){
             currentStructuredExpression.updateLastOperand(num);
         }else{
             currentStructuredExpression.addExpressionBlock("operand",num);
         }
+        displayingSuccessfulResult = false;
     }
 
     public void pressOperation(String op){
+        //if we are displaying a result and press an operator, use the
+        //old result as the new operand
+        if(displayingSuccessfulResult){
+            currentStructuredExpression = new StructuredExpression();
+            currentStructuredExpression.addExpressionBlock("operand",lastResult);
+        }
         currentStructuredExpression.addExpressionBlock("operator",op);
+        displayingSuccessfulResult = false;
     }
 
     public void pressParens(){
         currentStructuredExpression.handleParens();
+        displayingSuccessfulResult = false;
     }
 
     public void pressEquals(){
         String expressionToEvaluate = currentStructuredExpression.toString();
         System.out.println("Evaluating: "+expressionToEvaluate);
-        lastResult = evaluateCurrentExpression();
+        evaluateCurrentExpression();
     }
 
     public void pressNegate(){
+        if(displayingSuccessfulResult){
+            currentStructuredExpression = new StructuredExpression();
+            currentStructuredExpression.addExpressionBlock("operand",lastResult);
+        }
         if(currentStructuredExpression.currentlyTypingNumber()){
             currentStructuredExpression.negateOperand();
         }
+        displayingSuccessfulResult = false;
     }
 
     public void pressBack(){
+        displayingSuccessfulResult = false;
         currentStructuredExpression.handleBackspace();
     }
 
     public void pressClear(){
         currentStructuredExpression = new StructuredExpression();
         lastResult = null;
+        displayingSuccessfulResult = false;
     }
 
     /**
@@ -96,6 +119,7 @@ public class Calculator {
      * Default constructor -- current expression = 0, last result = null
      */
     public Calculator(){
+        displayingSuccessfulResult = false;
         lastResult=null;
         currentStructuredExpression = new StructuredExpression();
     }

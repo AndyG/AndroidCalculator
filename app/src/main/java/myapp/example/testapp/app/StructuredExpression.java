@@ -1,4 +1,4 @@
-    package myapp.example.testapp.app;
+package myapp.example.testapp.app;
 
 /**
  * Created by root on 5/25/14.

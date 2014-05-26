@@ -91,6 +91,7 @@ public class MainActivity extends Activity {
     }
 
     public void onParensButtonClicked(View v){
+        myVib.vibrate(BUTTON_VIB_LENGTH);
         calculator.pressParens();
         resultDisplay.setVisibility(View.GONE);
         updateDisplays();
