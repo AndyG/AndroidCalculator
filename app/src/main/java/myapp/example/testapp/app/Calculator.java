@@ -57,11 +57,7 @@ public class Calculator implements Parcelable {
         if(resultDisplayState==2){
             currentStructuredExpression = new StructuredExpression();
         }
-        if(currentStructuredExpression.currentlyTypingNumber()){
-            currentStructuredExpression.updateLastOperand(num);
-        }else{
-            currentStructuredExpression.addExpressionBlock("operand",num);
-        }
+        currentStructuredExpression.handleOperand(num);
         resultDisplayState = 0;
     }
 
@@ -72,12 +68,17 @@ public class Calculator implements Parcelable {
             currentStructuredExpression = new StructuredExpression();
             currentStructuredExpression.addExpressionBlock("operand",lastResult);
         }
-        currentStructuredExpression.addExpressionBlock("operator",op);
+        currentStructuredExpression.handleOperator(op);
         resultDisplayState=0;
     }
 
     public void pressParens(){
         currentStructuredExpression.handleParens();
+        resultDisplayState=0;
+    }
+
+    public void pressFunction(String functionText){
+        currentStructuredExpression.handleFunction(functionText);
         resultDisplayState=0;
     }
 

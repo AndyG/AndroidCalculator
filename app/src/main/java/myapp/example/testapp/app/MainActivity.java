@@ -131,6 +131,14 @@ public class MainActivity extends Activity {
         updateDisplays();
     }
 
+    public void onFunctionButtonClicked(View v){
+        Button buttonPressed = (Button)v;
+        myVib.vibrate(BUTTON_VIB_LENGTH);
+        calculator.pressFunction(buttonPressed.getText().toString());
+        resultDisplay.setVisibility(View.GONE);
+        updateDisplays();
+    }
+
     public void onNegateButtonClicked(View v){
         myVib.vibrate(BUTTON_VIB_LENGTH);
         calculator.pressNegate();

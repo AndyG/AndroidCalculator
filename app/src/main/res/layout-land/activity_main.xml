@@ -36,7 +36,7 @@
         </TextView>
 
     </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +44,19 @@
         android:layout_marginLeft="125pt"
         android:layout_marginRight="10pt"
         android:layout_marginTop="5pt">
+        <Button
+            android:background="@color/liteblue"
+            android:text="@string/sin"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_height="10pt"
+            android:id="@+id/btn_sin"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:onClick="onFunctionButtonClicked"
+            android:longClickable="false">
+        </Button>
         <Button
             android:background="@color/liteblue"
             android:text="@string/clear"

@@ -104,32 +104,6 @@ public class StructuredExpression {
         return false;
     }
 
-    //run when user presses a number key and they have already begun typing a number.
-    public Boolean updateLastOperand(String nextNum){
-        if(expressionArray.size()==0){
-            System.out.println("Attempting to update in empty expressionArray");
-            return false;
-        }
-
-        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
-        if(!lastBlock.blockType.equals("operand")){
-            System.out.println("Attempting to update something that isn't an operand");
-            return false;
-        }
-
-        if(lastBlock.blockType.equals("operand")){
-            if(nextNum.equals(".") && lastBlock.value.contains(".")){
-                System.out.println("Attempted to add a decimal point to an operand containing a decimal point.");
-                return false;
-            }
-
-            lastBlock.value = lastBlock.value + nextNum;
-            return true;
-        }
-
-        System.out.println("Reached end of updateLastOperand!");
-        return false;
-    }
 
     public Boolean negateOperand(){
         if(expressionArray.isEmpty()){
@@ -183,6 +157,105 @@ public class StructuredExpression {
         }
     }
 
+    public Boolean handleOperand(String operandText){
+        if(expressionArray.isEmpty()){
+            expressionArray.add(new ExpressionBlock("operand",operandText));
+            return true;
+        }
+
+        //nonempty expressionArray
+        //handle lastBlock cases: operand, operator, openParen, closeParen, function
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+        String lastBlockType = lastBlock.blockType;
+
+        //putting in operand, last block was an operator. append.
+        if(lastBlockType.equals("operator")){
+            expressionArray.add(new ExpressionBlock("operand",operandText));
+            return true;
+        }
+        //putting in operand but the last ExpressionBlock was an openParen.
+        else if(lastBlockType.equals("openParen")){
+            expressionArray.add(new ExpressionBlock("operand",operandText));
+            return true;
+        }
+        //putting in operand but the last ExpressionBlock was a closeParen.
+        else if(lastBlockType.equals("closeParen")){
+            expressionArray.add(new ExpressionBlock("operator","*"));
+            expressionArray.add(new ExpressionBlock("operand",operandText));
+            return true;
+        }
+        //putting in operand but the last ExpressionBlock was an operand.
+        //append this operand to that operand
+        //handle case where typed decimal but the operand already has a decimal
+        else if(lastBlockType.equals("operand")){
+            if(operandText.equals(".") && lastBlock.value.contains(".")){
+                return false;
+            }
+            //can append
+            lastBlock.value = lastBlock.value+operandText;
+            expressionArray.set(expressionArray.size()-1,lastBlock);
+            return true;
+        }
+        //putting in operand, last block was a function
+        else if(lastBlockType.equals("function")){
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            openParensCount++;
+            expressionArray.add(new ExpressionBlock("operand",operandText));
+            return true;
+        }
+        //shouldn't get down here!
+        else{
+            System.out.println("Somehow reached end of handleOperand!");
+            return false;
+        }
+    }
+
+    //user pressed operator
+    //handle last block cases: empty, operator, operand, open paren, close paren, function
+    public Boolean handleOperator(String operatorText){
+        //handle empty case
+        if(expressionArray.isEmpty()){
+            //do nothing
+            return false;
+        }
+
+        //nonempty expression array
+
+        String lastBlockType = expressionArray.get(expressionArray.size()-1).blockType;
+
+
+        //putting in operator but the last ExpressionBlock was an operator.
+        //replace last ExpressionBlock with the new operator
+        if(lastBlockType.equals("operator")){
+            expressionArray.set(expressionArray.size() - 1, new ExpressionBlock("operator", operatorText));
+            return true;
+        }
+        //putting in operator when last block was an operand.
+        else if(lastBlockType.equals("operand")){
+            expressionArray.add(new ExpressionBlock("operator",operatorText));
+            return true;
+        }
+        //putting in operator when last block was an open paren. do nothing
+        else if(lastBlockType.equals("openParen")){
+            return false;
+        }
+        //putting in operator when last block was a closeParen
+        else if(lastBlockType.equals("closeParen")){
+            expressionArray.add(new ExpressionBlock("operator",operatorText));
+            return true;
+        }
+        //putting in an operator when last block was a function. do nothing (for now?)
+        else if(lastBlockType.equals("function")){
+            return false;
+        }
+        //shouldn't get here
+        else{
+            System.out.println("Somehow got to end of handleOperator.");
+            return false;
+        }
+    }
+
+
     public void handleBackspace(){
         if(expressionArray.isEmpty()){
             return;
@@ -200,10 +273,53 @@ public class StructuredExpression {
             if(lastBlock.blockType.equals("openParen")){
                 openParensCount--;
             }
+            expressionArray.remove(expressionArray.size() - 1);
+        }else if(lastBlock.blockType.equals("function")){
             expressionArray.remove(expressionArray.size()-1);
-        }else{
+        }
+        else{
             lastBlock.value=val;
             expressionArray.set(expressionArray.size()-1,lastBlock);
+        }
+    }
+
+    public Boolean handleFunction(String functionText){
+        if(expressionArray.isEmpty()){
+            expressionArray.add(new ExpressionBlock("function",functionText));
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            openParensCount++;
+            return true;
+        }
+
+        //expression array not empty
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+        String lastBlockType = lastBlock.blockType;
+
+        if(lastBlockType.equals("openParen")){
+            expressionArray.add(new ExpressionBlock("function",functionText));
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            openParensCount++;
+            return true;
+        }else if(lastBlockType.equals("operator")){
+            expressionArray.add(new ExpressionBlock("function",functionText));
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            openParensCount++;
+            return true;
+        }else if(lastBlockType.equals("operand")||lastBlockType.equals("closeParen")){
+            expressionArray.add(new ExpressionBlock("operator","*"));
+            expressionArray.add(new ExpressionBlock("function",functionText));
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            openParensCount++;
+            return true;
+        }else if(lastBlockType.equals("function")){
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            expressionArray.add(new ExpressionBlock("function",functionText));
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            openParensCount+=2;
+            return true;
+        }else{
+            System.out.println("REACHED END OF HANDLEPARENS");
+            return false;
         }
     }
 
@@ -236,12 +352,18 @@ public class StructuredExpression {
                 openParensCount++;
             }
             return true;
-        }else{
+        }else if(lastBlockType.equals("function")){
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            openParensCount++;
+            return true;
+        }
+        else{
             System.out.println("REACHED END OF HANDLEPARENS");
             return false;
         }
     }
 
+    //closes all open parentheses if need be. called when equals sign pressed.
     public void closeParens(){
         while(openParensCount!=0){
             expressionArray.add(new ExpressionBlock("closeParen",")"));
