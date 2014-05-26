@@ -47,7 +47,7 @@ public class Calculator {
      * Otherwise, append this number to the currentExpression.
      */
     public void pressNumber(String num){
-        if(startedTypingNumber){
+        if(startedTypingNumber && currentStructuredExpression.currentlyTypingNumber()){
             currentStructuredExpression.updateLastOperand(num);
         }else{
             currentStructuredExpression.addExpressionBlock("operand",num);
@@ -68,13 +68,21 @@ public class Calculator {
         startedBuildingExpression=false;
     }
 
+    public void pressNegate(){
+        if(currentStructuredExpression.currentlyTypingNumber()){
+            currentStructuredExpression.negateOperand();
+        }
+    }
+
     public void pressBack(){
-        //not implemented
+        currentStructuredExpression.handleBackspace();
     }
 
     public void pressClear(){
         currentStructuredExpression = new StructuredExpression();
         lastResult = null;
+        startedTypingNumber=false;
+        startedBuildingExpression=false;
     }
 
     /**

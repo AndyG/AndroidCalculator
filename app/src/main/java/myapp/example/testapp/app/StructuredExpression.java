@@ -106,12 +106,78 @@ public class StructuredExpression {
         return false;
     }
 
+    public Boolean negateOperand(){
+        if(expressionArray.isEmpty()){
+            System.out.println("can't negate empty expression");
+            return false;
+        }
+
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+        if(lastBlock.blockType.equals("operand")){
+            //multiply this operand by -1
+            Double val = Double.parseDouble(removeParentheses(lastBlock.value));
+            Double negatedVal = val*(-1);
+            if(negatedVal<0){
+                lastBlock.value = "("+negatedVal.toString()+")";
+            }else{
+                lastBlock.value = negatedVal.toString();
+            }
+            expressionArray.set(expressionArray.size()-1,lastBlock);
+            return true;
+        }else{
+            System.out.println("Can't negate non-operand.");
+            return false;
+        }
+    }
+
+    private String removeParentheses(String s){
+        s = s.replace("(","");
+        return(s.replace(")",""));
+    }
+
     @Override
     public String toString(){
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for(ExpressionBlock b : expressionArray){
-            buf.append(b.value.toString());
+            buf.append(b.value);
         }
         return buf.toString();
+    }
+
+    //for use when I have parentheses
+    public Boolean currentlyTypingNumber(){
+        if(expressionArray.isEmpty()){
+            return false;
+        }
+
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+
+        //if the last block is not an operand or is an operand and ends with ),
+        //then we are not currently typing a number
+        if(lastBlock.blockType!="operand"){
+            return false;
+        }else if(lastBlock.value.endsWith(")")){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public void handleBackspace(){
+        if(expressionArray.isEmpty()){
+            return;
+        }
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+
+        String val = lastBlock.value;
+        System.out.println("Before backspace: "+val);
+        val = val.substring(0,val.length()-1);
+        System.out.println("After backspace: "+val);
+        if(val.length()==0){
+            expressionArray.remove(expressionArray.size()-1);
+        }else{
+            lastBlock.value=val;
+            expressionArray.set(expressionArray.size()-1,lastBlock);
+        }
     }
 }

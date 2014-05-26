@@ -78,6 +78,12 @@ public class MainActivity extends Activity {
         updateDisplays();
     }
 
+    public void onNegateButtonClicked(View v){
+        calculator.pressNegate();
+        resultDisplay.setVisibility(View.GONE);
+        updateDisplays();
+    }
+
     public void onEqualsButtonClicked(View v){
         calculator.pressEquals();
         resultDisplay.setVisibility(View.VISIBLE);
