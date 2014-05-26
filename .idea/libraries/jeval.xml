@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jeval">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/jeval.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

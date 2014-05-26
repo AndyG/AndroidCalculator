@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
     public void onRestoreInstanceState(Bundle savedInstanceState){
         calculator = savedInstanceState.getParcelable("calculator");
         updateDisplays();
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -69,21 +70,43 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void updateDisplays(){
+    public void updateDisplays() {
         String[] currentCalculatorState = calculator.getStringValues();
-        if(currentCalculatorState[0]!=null)
+        //0 is current expression string
+        //1 is last result
+        //2 is result display state (0, 1, or 2)
+        if (currentCalculatorState[0] != null)
             currentExpressionDisplay.setText(currentCalculatorState[0]);
-        if(currentCalculatorState[2]!=null && currentCalculatorState[1]!=null){
-            String result = currentCalculatorState[1];
-            if(result.length()>8) {
-                result = currentCalculatorState[1].substring(0,8);
-            }
-            resultDisplay.setText(result);
+        if(currentCalculatorState[2].equals("0")){
+            resultDisplay.setVisibility(View.GONE);
+        }
+        if (currentCalculatorState[2].equals("2") && currentCalculatorState[1] != null) {
+            resultDisplay.setText(currentCalculatorState[1]);
+            resultDisplay.setVisibility(View.VISIBLE);
+        } else if (currentCalculatorState[2].equals("1")) {
+            resultDisplay.setText("Invalid");
             resultDisplay.setVisibility(View.VISIBLE);
         }else{
-            resultDisplay.setText("");
+            System.out.println("Got here somehow...");
+            System.out.println("result display state: "+currentCalculatorState[1]);
         }
     }
+
+
+
+//        if(currentCalculatorState[0]!=null)
+//            currentExpressionDisplay.setText(currentCalculatorState[0]);
+//        if(currentCalculatorState[2]!=null && currentCalculatorState[1]!=null){
+//            String result = currentCalculatorState[1];
+//            if(result.length()>8) {
+//                result = currentCalculatorState[1].substring(0,8);
+//            }
+//            resultDisplay.setText(result);
+//            resultDisplay.setVisibility(View.VISIBLE);
+//        }else if(currentCalculatorState[1]!=null && currentCalculatorState[1].equals("Invalid Expression")) {
+//            resultDisplay.setText(currentCalculatorState[1]);
+//        }
+//    }
 
     public void onNumberButtonClicked(View v){
         myVib.vibrate(BUTTON_VIB_LENGTH);
