@@ -117,11 +117,7 @@ public class StructuredExpression {
             //multiply this operand by -1
             Double val = Double.parseDouble(removeParentheses(lastBlock.value));
             Double negatedVal = val*(-1);
-            if(negatedVal<0){
-                lastBlock.value = "("+negatedVal.toString()+")";
-            }else{
-                lastBlock.value = negatedVal.toString();
-            }
+            lastBlock.value = negatedVal.toString();
             expressionArray.set(expressionArray.size()-1,lastBlock);
             return true;
         }else{
