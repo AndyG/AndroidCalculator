@@ -240,4 +240,11 @@ public class StructuredExpression {
             return false;
         }
     }
+
+    public void closeParens(){
+        while(openParensCount!=0){
+            expressionArray.add(new ExpressionBlock("closeParen",")"));
+            openParensCount--;
+        }
+    }
 }

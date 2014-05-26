@@ -18,6 +18,8 @@ public class Calculator {
 
         //attempt to evaluate -- if the expression is invalid, return null.
         try {
+            //first, close all parens in the expression
+            currentStructuredExpression.closeParens();
             res = brain.getNumberResult(currentStructuredExpression.toString());
         }catch(EvaluationException e){
             e.printStackTrace();
