@@ -54,6 +54,10 @@ public class Calculator {
         currentStructuredExpression.addExpressionBlock("operator",op);
     }
 
+    public void pressParens(){
+        currentStructuredExpression.handleParens();
+    }
+
     public void pressEquals(){
         String expressionToEvaluate = currentStructuredExpression.toString();
         System.out.println("Evaluating: "+expressionToEvaluate);

@@ -2,6 +2,7 @@ package myapp.example.testapp.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,8 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+
 public class MainActivity extends Activity {
 
+    private int BUTTON_VIB_LENGTH=1;
+    private Vibrator myVib;
     private Boolean startedTypingNumber;
     private Boolean startedBuildingExpression;
     private TextView currentOperandDisplay;
@@ -22,6 +26,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myVib = (Vibrator)this.getSystemService(VIBRATOR_SERVICE);
+
         setContentView(R.layout.activity_main);
         Log.w("debugMessage", "created main activity");
         startedTypingNumber = false;
@@ -69,6 +75,7 @@ public class MainActivity extends Activity {
     }
 
     public void onNumberButtonClicked(View v){
+        myVib.vibrate(BUTTON_VIB_LENGTH);
         Button buttonPressed = (Button)v;
         calculator.pressNumber(buttonPressed.getText().toString());
         resultDisplay.setVisibility(View.GONE);
@@ -76,31 +83,42 @@ public class MainActivity extends Activity {
     }
 
     public void onOperationButtonClicked(View v){
+        myVib.vibrate(BUTTON_VIB_LENGTH);
         Button buttonPressed = (Button)v;
         calculator.pressOperation(buttonPressed.getText().toString());
         resultDisplay.setVisibility(View.GONE);
         updateDisplays();
     }
 
+    public void onParensButtonClicked(View v){
+        calculator.pressParens();
+        resultDisplay.setVisibility(View.GONE);
+        updateDisplays();
+    }
+
     public void onNegateButtonClicked(View v){
+        myVib.vibrate(BUTTON_VIB_LENGTH);
         calculator.pressNegate();
         resultDisplay.setVisibility(View.GONE);
         updateDisplays();
     }
 
     public void onEqualsButtonClicked(View v){
+        myVib.vibrate(BUTTON_VIB_LENGTH);
         calculator.pressEquals();
         resultDisplay.setVisibility(View.VISIBLE);
         updateDisplays();
     }
 
     public void onClearButtonClicked(View v){
+        myVib.vibrate(BUTTON_VIB_LENGTH);
         calculator.pressClear();
         resultDisplay.setVisibility(View.GONE);
         updateDisplays();
     }
 
     public void onBackButtonClicked(View v){
+        myVib.vibrate(BUTTON_VIB_LENGTH);
         calculator.pressBack();
         resultDisplay.setVisibility(View.GONE);
         updateDisplays();
