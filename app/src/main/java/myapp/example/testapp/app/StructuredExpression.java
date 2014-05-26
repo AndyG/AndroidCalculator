@@ -4,6 +4,8 @@ package myapp.example.testapp.app;
  * Created by root on 5/25/14.
  */
 
+import net.sourceforge.jeval.function.math.Exp;
+
 import java.util.ArrayList;
 
 /**
@@ -162,15 +164,6 @@ public class StructuredExpression {
         return(s.replace(")",""));
     }
 
-    @Override
-    public String toString(){
-        StringBuilder buf = new StringBuilder();
-        for(ExpressionBlock b : expressionArray){
-            buf.append(b.value);
-        }
-        return buf.toString();
-    }
-
     //for use when I have parentheses
     public Boolean currentlyTypingNumber(){
         if(expressionArray.isEmpty()){
@@ -254,5 +247,41 @@ public class StructuredExpression {
             expressionArray.add(new ExpressionBlock("closeParen",")"));
             openParensCount--;
         }
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder buf = new StringBuilder();
+        for(ExpressionBlock b : expressionArray){
+            buf.append(b.value);
+        }
+        return buf.toString();
+    }
+
+    //returns as string array
+    public String[] toStringArray(){
+        //get length
+        Integer arrayLen = expressionArray.size()*2;
+        String [] res = new String[arrayLen];
+        for(int i=0;i<expressionArray.size();i++){
+            res[i]=expressionArray.get(i).blockType;
+            res[i+1]=expressionArray.get(i).value;
+        }
+        return res;
+    }
+
+    //create StructuredExpression from string array
+    public StructuredExpression(String[] src){
+            expressionArray = new ArrayList<ExpressionBlock>();
+            openParensCount=0;
+            for(int i=0;i<src.length;i+=2){
+                expressionArray.add(new ExpressionBlock(src[i],src[i+1]));
+                if(src[i]=="openParen"){
+                    openParensCount++;
+                }
+                if(src[i]=="closeParen"){
+                    openParensCount--;
+                }
+            }
     }
 }

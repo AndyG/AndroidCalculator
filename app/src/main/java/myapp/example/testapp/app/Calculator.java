@@ -1,14 +1,18 @@
 package myapp.example.testapp.app;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import net.sourceforge.jeval.*;
 
 
 /**
  * This is the class for the calculator's functionality and members.
  */
-public class Calculator {
-    private StructuredExpression currentStructuredExpression;
+public class Calculator implements Parcelable {
+
     private String lastResult;
     private Boolean displayingSuccessfulResult;
+    private StructuredExpression currentStructuredExpression;
 
     /**
      * Evaluates the current expression in the calculator and returns a string representing the answer.
@@ -85,7 +89,7 @@ public class Calculator {
     public void pressNegate(){
         if(displayingSuccessfulResult){
             currentStructuredExpression = new StructuredExpression();
-            currentStructuredExpression.addExpressionBlock("operand",lastResult);
+            currentStructuredExpression.addExpressionBlock("operand", lastResult);
         }
         if(currentStructuredExpression.currentlyTypingNumber()){
             currentStructuredExpression.negateOperand();
@@ -108,9 +112,10 @@ public class Calculator {
      * Get String values to populate UI
      */
     public String[] getStringValues(){
-        String[] result = new String[2];
+        String[] result = new String[3];
         result[0]=currentStructuredExpression.toString();
         result[1]=lastResult;
+        result[2]=(displayingSuccessfulResult ? "1" : null);
         return result;
     }
 
@@ -122,5 +127,40 @@ public class Calculator {
         displayingSuccessfulResult = false;
         lastResult=null;
         currentStructuredExpression = new StructuredExpression();
+    }
+
+    //required by Parcelable
+    public int describeContents(){
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags)
+    {
+        out.writeString(lastResult);
+        out.writeInt(displayingSuccessfulResult ? 1 : 0);
+        out.writeStringArray(currentStructuredExpression.toStringArray());
+    }
+
+
+    public class MyCreator implements Parcelable.Creator<Calculator> {
+        public Calculator createFromParcel(Parcel source) {
+            return new Calculator(source);
+        }
+        public Calculator[] newArray(int size) {
+            return new Calculator[size];
+        }
+    }
+    /**
+     * This will be used only by the MyCreator
+     * @param source
+     */
+    public Calculator(Parcel source){
+        /*
+         * Reconstruct from the Parcel
+         */
+        lastResult = source.readString();
+        displayingSuccessfulResult = (source.readInt()==1);
+        String [] structuredExprArray = source.createStringArray();
+        currentStructuredExpression = new StructuredExpression(structuredExprArray);
     }
 }

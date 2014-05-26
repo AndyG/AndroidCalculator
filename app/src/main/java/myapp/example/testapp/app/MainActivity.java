@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-
-
 public class MainActivity extends Activity {
 
     private int BUTTON_VIB_LENGTH=1;
@@ -36,8 +34,20 @@ public class MainActivity extends Activity {
         resultDisplay = (TextView)findViewById(R.id.resultDisplay);
         resultDisplay.setVisibility(View.GONE);
         calculator = new Calculator();
+        updateDisplays();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        outState.putParcelable("calculator",calculator);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        calculator = savedInstanceState.getParcelable("calculator");
+        updateDisplays();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,12 +73,13 @@ public class MainActivity extends Activity {
         String[] currentCalculatorState = calculator.getStringValues();
         if(currentCalculatorState[0]!=null)
             currentExpressionDisplay.setText(currentCalculatorState[0]);
-        if(currentCalculatorState[1]!=null){
+        if(currentCalculatorState[2]!=null && currentCalculatorState[1]!=null){
             String result = currentCalculatorState[1];
             if(result.length()>8) {
                 result = currentCalculatorState[1].substring(0,8);
             }
             resultDisplay.setText(result);
+            resultDisplay.setVisibility(View.VISIBLE);
         }else{
             resultDisplay.setText("");
         }
