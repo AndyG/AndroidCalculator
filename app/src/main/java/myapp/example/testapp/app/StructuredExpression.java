@@ -137,8 +137,16 @@ public class StructuredExpression {
 
         ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
         if(lastBlock.blockType.equals("operand")){
+            //make sure
             //multiply this operand by -1
-            Double val = Double.parseDouble(removeParentheses(lastBlock.value));
+            Double val = null;
+            try {
+                val = Double.parseDouble(removeParentheses(lastBlock.value));
+            }catch(NumberFormatException e){
+                //failed to convert operand to double, return false
+                e.printStackTrace();
+                return false;
+            }
             Double negatedVal = val*(-1);
             lastBlock.value = negatedVal.toString();
             expressionArray.set(expressionArray.size()-1,lastBlock);
