@@ -92,22 +92,6 @@ public class MainActivity extends Activity {
         }
     }
 
-
-
-//        if(currentCalculatorState[0]!=null)
-//            currentExpressionDisplay.setText(currentCalculatorState[0]);
-//        if(currentCalculatorState[2]!=null && currentCalculatorState[1]!=null){
-//            String result = currentCalculatorState[1];
-//            if(result.length()>8) {
-//                result = currentCalculatorState[1].substring(0,8);
-//            }
-//            resultDisplay.setText(result);
-//            resultDisplay.setVisibility(View.VISIBLE);
-//        }else if(currentCalculatorState[1]!=null && currentCalculatorState[1].equals("Invalid Expression")) {
-//            resultDisplay.setText(currentCalculatorState[1]);
-//        }
-//    }
-
     public void onNumberButtonClicked(View v){
         myVib.vibrate(BUTTON_VIB_LENGTH);
         Button buttonPressed = (Button)v;

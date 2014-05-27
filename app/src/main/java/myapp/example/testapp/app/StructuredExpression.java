@@ -4,7 +4,6 @@ package myapp.example.testapp.app;
  * Created by root on 5/25/14.
  */
 
-import net.sourceforge.jeval.function.math.Exp;
 
 import java.util.ArrayList;
 
@@ -277,6 +276,10 @@ public class StructuredExpression {
         }else if(lastBlock.blockType.equals("function")){
             expressionArray.remove(expressionArray.size()-1);
         }
+        //backspaced on operand and just have negative sign left
+        else if(lastBlock.blockType.equals("operand") && val.equals("-")){
+            expressionArray.remove(expressionArray.size() - 1);
+        }
         else{
             lastBlock.value=val;
             expressionArray.set(expressionArray.size()-1,lastBlock);
@@ -374,7 +377,12 @@ public class StructuredExpression {
     @Override
     public String toString(){
         StringBuilder buf = new StringBuilder();
-        for(ExpressionBlock b : expressionArray){
+        for(int i=0;i<expressionArray.size();i++){
+            ExpressionBlock b = expressionArray.get(i);
+            if(i!=expressionArray.size()-1 && b.blockType.equals("operand")){
+                b.value = formatDecimalOperand(b.value);
+                expressionArray.set(i,b);
+            }
             buf.append(b.value);
         }
         return buf.toString();
@@ -405,5 +413,35 @@ public class StructuredExpression {
                     openParensCount--;
                 }
             }
+    }
+
+    //fix operands which have either nothing 0 pre-decimal point or nothing after the decimal point
+    private String formatDecimalOperand(String num) {
+        //no decimal, no problem
+        if (!num.contains(".")) {
+            return num;
+        }
+
+        if (num.equals(".")) {
+            return "0.0";
+        }
+
+        //split string on decimal. length 1 implies no post-decimal info.
+        //length 2 implies either no pre-decimal info or info on both sides (hence test for emptiness of left side).
+        String[] splitNum = num.split("\\.");
+        Boolean changed = false;
+
+        if (splitNum.length == 1) {
+            return (num + "0");
+        } else if (splitNum.length == 2) {
+            if(splitNum[0].isEmpty())
+                return ("0" + num);
+            else
+                return(num);
+        }
+        //we should never get here, but just in case...
+        else{
+            return(num);
+        }
     }
 }

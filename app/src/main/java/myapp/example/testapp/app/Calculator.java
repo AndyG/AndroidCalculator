@@ -78,6 +78,10 @@ public class Calculator implements Parcelable {
     }
 
     public void pressFunction(String functionText){
+        if(resultDisplayState==2){
+            currentStructuredExpression = new StructuredExpression();
+            currentStructuredExpression.addExpressionBlock("operand",lastResult);
+        }
         currentStructuredExpression.handleFunction(functionText);
         resultDisplayState=0;
     }
@@ -120,7 +124,6 @@ public class Calculator implements Parcelable {
         result[2]=(resultDisplayState.toString());
         return result;
     }
-
 
     /**
      * Default constructor -- current expression = 0, last result = null
