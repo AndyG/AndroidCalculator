@@ -27,7 +27,11 @@
     <string name="cos">cos</string>
     <string name="abs">abs</string>
     <string name="tan">tan</string>
+    <string name="power">^</string>
+    <string name="log">log</string>
     <string name="sqrt">sqrt</string>
+    <string name="pi">π</string>
+
 
 
 
