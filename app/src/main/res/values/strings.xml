@@ -24,6 +24,8 @@
     <string name="decimal">.</string>
     <string name="negate">+/-</string>
     <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="abs">abs</string>
 
 
 

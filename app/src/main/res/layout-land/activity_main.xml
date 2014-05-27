@@ -114,6 +114,19 @@
         android:layout_marginRight="10pt"
         android:layout_marginTop="3pt">
         <Button
+            android:background="@color/liteblue"
+            android:text="@string/cos"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_height="10pt"
+            android:id="@+id/btn_cos"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:onClick="onFunctionButtonClicked"
+            android:longClickable="false">
+        </Button>
+        <Button
             android:background="@color/white"
             android:text="@string/seven"
             android:layout_weight="1"
@@ -170,6 +183,19 @@
         android:layout_marginLeft="125pt"
         android:layout_marginRight="10pt"
         android:layout_marginTop="3pt">
+        <Button
+            android:background="@color/liteblue"
+            android:textColor="@color/white"
+            android:text="@string/abs"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_abs"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:onClick="onFunctionButtonClicked"
+            android:longClickable="false">
+        </Button>
         <Button
             android:background="@color/white"
             android:text="@string/four"
