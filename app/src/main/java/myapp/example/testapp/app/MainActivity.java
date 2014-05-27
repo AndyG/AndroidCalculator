@@ -107,8 +107,13 @@ public class MainActivity extends Activity {
         //0 is current expression string
         //1 is last result
         //2 is result display state (0, 1, or 2)
-        if (currentCalculatorState[0] != null)
-            currentExpressionDisplay.setText(currentCalculatorState[0]);
+        if (currentCalculatorState[0] != null) {
+            String res = currentCalculatorState[0];
+            //this is okay because for now there is only one special operand (constant).
+            //in the future (e, etc.) we would want to replace all special operands with their presentation values.
+            res = res.replace("#{PI}", "π");
+            currentExpressionDisplay.setText(res);
+        }
         if(currentCalculatorState[2].equals("0")){
             resultDisplay.setVisibility(View.GONE);
         }
@@ -166,6 +171,14 @@ public class MainActivity extends Activity {
             resultDisplay.setVisibility(View.GONE);
             updateDisplays();
         }
+    }
+
+    public void onSpecialOperandButtonClicked(View v){
+        myVib.vibrate(BUTTON_VIB_LENGTH);
+        Button buttonPressed = (Button) v;
+        calculator.pressSpecialOperand(buttonPressed.getText().toString());
+        resultDisplay.setVisibility(View.GONE);
+        updateDisplays();
     }
 
     public void onOperationButtonClicked(View v){

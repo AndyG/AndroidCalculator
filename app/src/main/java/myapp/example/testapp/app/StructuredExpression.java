@@ -136,6 +136,31 @@ public class StructuredExpression {
         }
     }
 
+    public Boolean negateSpecialOperand(){
+        if(expressionArray.isEmpty()){
+            System.out.println("can't negate empty expression");
+            return false;
+        }
+
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+        if(lastBlock.blockType.equals("specialOperand")){
+            //make sure
+            //multiply this operand by -1
+            String val = lastBlock.value;
+            if(val.startsWith("-")){
+                val = val.substring(1);
+            }else{
+                val = "-"+val;
+            }
+            lastBlock.value = val;
+            expressionArray.set(expressionArray.size()-1,lastBlock);
+            return true;
+        }else{
+            System.out.println("Can't negate non-special-operand.");
+            return false;
+        }
+    }
+
     private String removeParentheses(String s){
         s = s.replace("(","");
         return(s.replace(")",""));
@@ -155,6 +180,23 @@ public class StructuredExpression {
             return false;
         }else if(lastBlock.value.endsWith(")")){
             return false;
+        }else{
+            return true;
+        }
+    }
+
+    //for use when I have parentheses
+    public Boolean currentlyTypingSpecialOperand(){
+        if(expressionArray.isEmpty()){
+            return false;
+        }
+
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+
+        //if the last block is not an operand or is an operand and ends with ),
+        //then we are not currently typing a number
+        if(lastBlock.blockType.equals("specialOperand")){
+            return true;
         }else{
             return true;
         }
@@ -203,6 +245,10 @@ public class StructuredExpression {
         else if(lastBlockType.equals("function")){
             expressionArray.add(new ExpressionBlock("openParen","("));
             openParensCount++;
+            expressionArray.add(new ExpressionBlock("operand", operandText));
+            return true;
+        }else if(lastBlockType.equals("specialOperand")){
+            expressionArray.add(new ExpressionBlock("operator","*"));
             expressionArray.add(new ExpressionBlock("operand",operandText));
             return true;
         }
@@ -251,6 +297,11 @@ public class StructuredExpression {
         else if(lastBlockType.equals("function")){
             return false;
         }
+        //operator -- last block was specialOperand
+        else if(lastBlockType.equals("specialOperand")){
+            expressionArray.add(new ExpressionBlock("operator",operatorText));
+            return true;
+        }
         //shouldn't get here
         else{
             System.out.println("Somehow got to end of handleOperator.");
@@ -282,6 +333,9 @@ public class StructuredExpression {
         }
         //backspaced on operand and just have negative sign left
         else if(lastBlock.blockType.equals("operand") && val.equals("-")){
+            expressionArray.remove(expressionArray.size() - 1);
+        }
+        else if(lastBlock.blockType.equals("specialOperand")){
             expressionArray.remove(expressionArray.size() - 1);
         }
         else{
@@ -324,8 +378,51 @@ public class StructuredExpression {
             expressionArray.add(new ExpressionBlock("openParen","("));
             openParensCount+=2;
             return true;
-        }else{
+        }else if(lastBlockType.equals("specialOperand")) {
+            expressionArray.add(new ExpressionBlock("operator","*"));
+            expressionArray.add(new ExpressionBlock("function",functionText));
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            openParensCount++;
+            return true;
+        }
+        else{
             System.out.println("REACHED END OF HANDLEPARENS");
+            return false;
+        }
+    }
+
+    public Boolean handleSpecialOperand(String opText){
+        if(expressionArray.isEmpty()){
+            expressionArray.add(new ExpressionBlock("specialOperand",opText));
+            return true;
+        }
+
+        //expression array not empty
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+        String lastBlockType = lastBlock.blockType;
+
+        if(lastBlockType.equals("openParen")){
+            expressionArray.add(new ExpressionBlock("specialOperand",opText));
+            return true;
+        }else if(lastBlockType.equals("operator")){
+            expressionArray.add(new ExpressionBlock("specialOperand",opText));
+            return true;
+        }else if(lastBlockType.equals("operand")||lastBlockType.equals("closeParen")){
+            expressionArray.add(new ExpressionBlock("operator","*"));
+            expressionArray.add(new ExpressionBlock("specialOperand",opText));
+            return true;
+        }else if(lastBlockType.equals("function")){
+            expressionArray.add(new ExpressionBlock("openParen","("));
+            expressionArray.add(new ExpressionBlock("specialOperand",opText));
+            openParensCount++;
+            return true;
+        }else if(lastBlockType.equals("specialOperand")) {
+            expressionArray.add(new ExpressionBlock("operator","*"));
+            expressionArray.add(new ExpressionBlock("specialOperand",opText));
+            return true;
+        }
+        else{
+            System.out.println("REACHED END OF HANDLESPECIALOPERAND");
             return false;
         }
     }
@@ -349,7 +446,7 @@ public class StructuredExpression {
             expressionArray.add(new ExpressionBlock("openParen","("));
             openParensCount++;
             return true;
-        }else if(lastBlockType.equals("operand")||lastBlockType.equals("closeParen")){
+        }else if(lastBlockType.equals("operand")||lastBlockType.equals("closeParen")||lastBlockType.equals("specialOperand")){
             if(openParensCount>0){
                 expressionArray.add(new ExpressionBlock("closeParen",")"));
                 openParensCount--;

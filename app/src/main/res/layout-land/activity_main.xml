@@ -127,6 +127,7 @@
                     android:layout_width="wrap_content"
                     android:id="@+id/btn_pi"
                     android:text="@string/pi"
+                    android:onClick="onSpecialOperandButtonClicked"
                     >
                 </Button>
                 <Button

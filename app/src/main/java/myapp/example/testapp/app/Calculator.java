@@ -100,6 +100,7 @@ public class Calculator implements Parcelable {
         evaluateCurrentExpression();
     }
 
+    //need to make this handle specialOperands
     public void pressNegate(){
         if(resultDisplayState==2){
             currentStructuredExpression = new StructuredExpression();
@@ -108,7 +109,16 @@ public class Calculator implements Parcelable {
         if(currentStructuredExpression.currentlyTypingNumber()){
             currentStructuredExpression.negateOperand();
         }
+        if(currentStructuredExpression.currentlyTypingSpecialOperand()){
+            currentStructuredExpression.negateSpecialOperand();
+        }
         resultDisplayState=0;
+    }
+
+    public void pressSpecialOperand(String opText){
+        if(opText.equals("π")){
+            currentStructuredExpression.handleSpecialOperand("#{PI}");
+        }
     }
 
     public void pressBack(){
