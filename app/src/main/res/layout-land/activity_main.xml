@@ -44,6 +44,7 @@
         android:orientation="horizontal"
         >
         <LinearLayout
+            android:layout_marginLeft="90dp"
             android:id="@+id/function_buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,7 +143,7 @@
 
         <LinearLayout
             android:id="@+id/basicButtons"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="5pt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

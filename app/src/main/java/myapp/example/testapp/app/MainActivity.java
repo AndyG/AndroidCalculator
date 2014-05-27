@@ -85,7 +85,8 @@ public class MainActivity extends Activity {
 
         //in contains "." and isn't scientific notation
 
-        String[] split_in = in.split(".");
+        String[] split_in = in.split("\\.");
+        System.out.println(split_in.length);
         try {
             String pre_decimal = split_in[0];
             String post_decimal = split_in[1];
