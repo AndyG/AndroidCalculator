@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -95,7 +96,10 @@ public class MainActivity extends Activity {
     public void onNumberButtonClicked(View v){
         myVib.vibrate(BUTTON_VIB_LENGTH);
         Button buttonPressed = (Button)v;
-        calculator.pressNumber(buttonPressed.getText().toString());
+        String responseCode = calculator.pressNumber(buttonPressed.getText().toString());
+        if(responseCode!=null){
+            Toast.makeText(this,responseCode,Toast.LENGTH_SHORT).show();
+        }
         resultDisplay.setVisibility(View.GONE);
         updateDisplays();
     }

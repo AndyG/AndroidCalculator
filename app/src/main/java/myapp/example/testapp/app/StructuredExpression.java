@@ -444,4 +444,38 @@ public class StructuredExpression {
             return(num);
         }
     }
+
+    //returns null if it's okay to press an operand.
+    //otherwise, returns a message saying the operand is too long or has too many after-decimal digits
+    public String operandState(){
+        if(expressionArray.isEmpty()){
+            return null;
+        }
+
+        //nonempty expression array
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+        //not typing an operand, we're fine
+        if(!lastBlock.blockType.equals("operand")){
+            return null;
+        }
+
+        //typing an operand
+        String operandValue = lastBlock.value;
+        if(operandValue.length()>=10){
+            return("Current operand at maximum length.");
+        }else if(getDigitsAfterDecimal(operandValue) >=7){
+            return("Current operand has too many digits after decimal.");
+        }else{
+            return null;
+        }
+    }
+
+    private Integer getDigitsAfterDecimal(String operandValue){
+        //no decimal = no digits after decimal
+        if(!operandValue.contains(".")){
+            return 0;
+        }
+        int indexOfDecimal = operandValue.indexOf(".");
+        return((operandValue.length()-indexOfDecimal)-1);
+    }
 }

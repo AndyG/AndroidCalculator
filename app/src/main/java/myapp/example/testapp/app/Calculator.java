@@ -53,12 +53,20 @@ public class Calculator implements Parcelable {
      * If there is a decimal in the currentExpression already, ignore the button press.
      * Otherwise, append this number to the currentExpression.
      */
-    public void pressNumber(String num){
+    public String pressNumber(String num){
         if(resultDisplayState==2){
             currentStructuredExpression = new StructuredExpression();
         }
-        currentStructuredExpression.handleOperand(num);
         resultDisplayState = 0;
+        //get string response from current operand
+        String response = currentStructuredExpression.operandState();
+        if(response==null) {
+            currentStructuredExpression.handleOperand(num);
+            return null;
+        }else{
+            //return to MainActivity the code from operandState()
+            return response;
+        }
     }
 
     public void pressOperation(String op){
