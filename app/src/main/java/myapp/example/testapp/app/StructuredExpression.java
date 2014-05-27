@@ -123,7 +123,11 @@ public class StructuredExpression {
                 return false;
             }
             Double negatedVal = val*(-1);
-            lastBlock.value = negatedVal.toString();
+            if(negatedVal.doubleValue()==negatedVal.intValue()){
+                lastBlock.value = Integer.toString(negatedVal.intValue());
+            }else{
+                lastBlock.value = negatedVal.toString();
+            }
             expressionArray.set(expressionArray.size()-1,lastBlock);
             return true;
         }else{
