@@ -1,12 +1,17 @@
 package myapp.example.testapp.app;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,7 +87,7 @@ public class MainActivity extends Activity {
             resultDisplay.setVisibility(View.GONE);
         }
         if (currentCalculatorState[2].equals("2") && currentCalculatorState[1] != null) {
-            resultDisplay.setText(currentCalculatorState[1]);
+            resultDisplay.setText(currentCalculatorState[1].substring(0,Math.min(currentCalculatorState[1].length(),7)));
             resultDisplay.setVisibility(View.VISIBLE);
         } else if (currentCalculatorState[2].equals("1")) {
             resultDisplay.setText("Invalid");
@@ -92,13 +97,36 @@ public class MainActivity extends Activity {
             System.out.println("result display state: "+currentCalculatorState[1]);
         }
 
+        setFontSizes();
+    }
+
+    private void setFontSizes(){
         //set font size of displays
         Integer curLength = currentExpressionDisplay.getText().toString().length();
-        if(curLength < 15){
-            currentExpressionDisplay.setTextSize(40);
-        }else{
-            currentExpressionDisplay.setTextSize(25);
+
+        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int curRotation = display.getRotation();
+        //portrait
+        if(curRotation== Surface.ROTATION_0 || curRotation==Surface.ROTATION_180) {
+            if (curLength < 12) {
+                currentExpressionDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,50);
+                resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,70);
+            } else {
+                currentExpressionDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
+                resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,70);
+            }
         }
+        //landscape
+        else{
+            if (curLength < 50) {
+                currentExpressionDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
+                resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
+            } else {
+                currentExpressionDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+                resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
+            }
+        }
+
     }
 
     public void onNumberButtonClicked(View v){

@@ -15,8 +15,8 @@
         android:background="@drawable/rounded_corner">
         <TextView
             android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="13dp"
             android:id="@+id/currentExpressionDisplay"
             android:gravity="right"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:text="@string/zero">
         </TextView>
         <TextView
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="13dp"
             android:textSize="30sp"
             android:layout_weight="0"
             android:gravity="right"
