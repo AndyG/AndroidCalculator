@@ -91,40 +91,56 @@ public class MainActivity extends Activity {
             System.out.println("Got here somehow...");
             System.out.println("result display state: "+currentCalculatorState[1]);
         }
+
+        //set font size of displays
+        Integer curLength = currentExpressionDisplay.getText().toString().length();
+        if(curLength < 15){
+            currentExpressionDisplay.setTextSize(40);
+        }else{
+            currentExpressionDisplay.setTextSize(25);
+        }
     }
 
     public void onNumberButtonClicked(View v){
-        myVib.vibrate(BUTTON_VIB_LENGTH);
-        Button buttonPressed = (Button)v;
-        String responseCode = calculator.pressNumber(buttonPressed.getText().toString());
-        if(responseCode!=null){
-            Toast.makeText(this,responseCode,Toast.LENGTH_SHORT).show();
+        if(filterOnExpressionLength("number")) {
+            myVib.vibrate(BUTTON_VIB_LENGTH);
+            Button buttonPressed = (Button) v;
+            String responseCode = calculator.pressNumber(buttonPressed.getText().toString());
+            if (responseCode != null) {
+                Toast.makeText(this, responseCode, Toast.LENGTH_SHORT).show();
+            }
+            resultDisplay.setVisibility(View.GONE);
+            updateDisplays();
         }
-        resultDisplay.setVisibility(View.GONE);
-        updateDisplays();
     }
 
     public void onOperationButtonClicked(View v){
-        myVib.vibrate(BUTTON_VIB_LENGTH);
-        Button buttonPressed = (Button)v;
-        calculator.pressOperation(buttonPressed.getText().toString());
-        resultDisplay.setVisibility(View.GONE);
-        updateDisplays();
+        if(filterOnExpressionLength("operator")) {
+            myVib.vibrate(BUTTON_VIB_LENGTH);
+            Button buttonPressed = (Button) v;
+            calculator.pressOperation(buttonPressed.getText().toString());
+            resultDisplay.setVisibility(View.GONE);
+            updateDisplays();
+        }
     }
 
     public void onParensButtonClicked(View v){
-        myVib.vibrate(BUTTON_VIB_LENGTH);
-        calculator.pressParens();
-        resultDisplay.setVisibility(View.GONE);
-        updateDisplays();
+        if(filterOnExpressionLength("paren")) {
+            myVib.vibrate(BUTTON_VIB_LENGTH);
+            calculator.pressParens();
+            resultDisplay.setVisibility(View.GONE);
+            updateDisplays();
+        }
     }
 
     public void onFunctionButtonClicked(View v){
-        Button buttonPressed = (Button)v;
-        myVib.vibrate(BUTTON_VIB_LENGTH);
-        calculator.pressFunction(buttonPressed.getText().toString());
-        resultDisplay.setVisibility(View.GONE);
-        updateDisplays();
+        if(filterOnExpressionLength("function")) {
+            Button buttonPressed = (Button) v;
+            myVib.vibrate(BUTTON_VIB_LENGTH);
+            calculator.pressFunction(buttonPressed.getText().toString());
+            resultDisplay.setVisibility(View.GONE);
+            updateDisplays();
+        }
     }
 
     public void onNegateButtonClicked(View v){
@@ -153,5 +169,23 @@ public class MainActivity extends Activity {
         calculator.pressBack();
         resultDisplay.setVisibility(View.GONE);
         updateDisplays();
+    }
+
+    //return false if current expression is too long or
+    public Boolean filterOnExpressionLength(String buttonType){
+        Integer currentExpressionLength = currentExpressionDisplay.getText().toString().length();
+
+        //special case: we're displaying a result and we type an operator. We are still allowed to do this.
+        if(buttonType.equals("operator")){
+            if(resultDisplay.getVisibility()==View.VISIBLE){
+                return true;
+            }
+        }
+        if(currentExpressionLength >= 35){
+            Toast.makeText(this,"Current expression too long.",Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            return true;
+        }
     }
 }
