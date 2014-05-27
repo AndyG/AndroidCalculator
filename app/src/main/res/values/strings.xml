@@ -26,6 +26,8 @@
     <string name="sin">sin</string>
     <string name="cos">cos</string>
     <string name="abs">abs</string>
+    <string name="tan">tan</string>
+    <string name="sqrt">sqrt</string>
 
 
 

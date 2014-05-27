@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout_topRow"
-        android:layout_marginLeft="125pt"
+        android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:layout_marginTop="5pt">
         <Button
@@ -110,7 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout_row3"
-        android:layout_marginLeft="125pt"
+        android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:layout_marginTop="3pt">
         <Button
@@ -180,7 +180,7 @@
         android:layout_width="match_parent"
         android:layout_height="15pt"
         android:id="@+id/layout_row2"
-        android:layout_marginLeft="125pt"
+        android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:layout_marginTop="3pt">
         <Button
@@ -252,9 +252,22 @@
         android:layout_width="match_parent"
         android:layout_height="15pt"
         android:id="@+id/layout_row1"
-        android:layout_marginLeft="125pt"
+        android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:layout_marginTop="3pt">
+        <Button
+            android:background="@color/liteblue"
+            android:textColor="@color/white"
+            android:text="@string/tan"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_tan"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:onClick="onFunctionButtonClicked"
+            android:longClickable="false">
+        </Button>
         <Button
             android:background="@color/white"
             android:text="@string/one"
@@ -306,9 +319,22 @@
         android:layout_width="match_parent"
         android:layout_height="15pt"
         android:id="@+id/layout_bottomRow"
-        android:layout_marginLeft="125pt"
+        android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:layout_marginTop="3pt">
+        <Button
+            android:background="@color/liteblue"
+            android:textColor="@color/white"
+            android:text="@string/sqrt"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_sqrt"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:onClick="onFunctionButtonClicked"
+            android:longClickable="false">
+        </Button>
         <Button
             android:background="@color/white"
             android:text="@string/zero"
