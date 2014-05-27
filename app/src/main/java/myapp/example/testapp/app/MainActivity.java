@@ -76,6 +76,31 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    //truncate AFTER decimal on non-scientific notation input
+    private String truncate(String in){
+        //scientific notation or infinity, don't want to truncate
+        if(in.contains("E") || in.contains("Infinity") || !in.contains(".")){
+            return(in);
+        }
+
+        //in contains "." and isn't scientific notation
+
+        String[] split_in = in.split(".");
+        try {
+            String pre_decimal = split_in[0];
+            String post_decimal = split_in[1];
+            if(post_decimal.length()>6){
+                return(pre_decimal+"."+post_decimal.substring(0,6));
+            }else{
+                return(in);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return(in);
+        }
+
+    }
+
     public void updateDisplays() {
         String[] currentCalculatorState = calculator.getStringValues();
         //0 is current expression string
@@ -87,7 +112,7 @@ public class MainActivity extends Activity {
             resultDisplay.setVisibility(View.GONE);
         }
         if (currentCalculatorState[2].equals("2") && currentCalculatorState[1] != null) {
-            resultDisplay.setText(currentCalculatorState[1].substring(0,Math.min(currentCalculatorState[1].length(),7)));
+            resultDisplay.setText(truncate(currentCalculatorState[1]));
             resultDisplay.setVisibility(View.VISIBLE);
         } else if (currentCalculatorState[2].equals("1")) {
             resultDisplay.setText("Invalid");
