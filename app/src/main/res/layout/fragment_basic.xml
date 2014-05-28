@@ -2,77 +2,84 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/black"
     >
+
     <Button
-        android:layout_marginTop="30dp"
-        android:layout_height="100dp"
-        android:layout_width="20dp"
+        android:layout_height="70dp"
+        android:layout_width="15dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/btn_loadAdvanced"
         android:onClick="loadAdvancedFragment"
-        >
-    </Button>
+        android:text=">"
+        />
+
+
     <LinearLayout
         android:id="@+id/basic_buttons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         >
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/basic_topRow"
-            android:layout_marginLeft="10pt"
-            android:layout_marginRight="10pt"
-            android:layout_marginTop="5pt">
+            android:layout_height="0px"
+            android:layout_weight="2"
+            android:id="@+id/basic_topRow">
             <Button
                 android:textSize="30sp"
-                android:background="@color/liteblue"
-                android:text="@string/clear"
                 android:textColor="@color/white"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_clear_button_background"
+                android:text="@string/clear"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_clear"
-                android:layout_marginRight="5dp"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
                 android:onClick="onClearButtonClicked"
                 android:longClickable="false">
             </Button>
             <Button
+                android:background="@drawable/portrait_operation_button_background"
+                android:layout_margin="@dimen/portrait_button_margin"
                 android:textSize="30sp"
                 android:text="@string/divide"
                 android:textColor="@color/white"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_divide"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onOperationButtonClicked"
                 android:longClickable="false">
             </Button>
 
             <Button
+                android:background="@drawable/portrait_operation_button_background"
+                android:layout_margin="@dimen/portrait_button_margin"
                 android:textSize="30sp"
                 android:text="@string/multiply"
                 android:textColor="@color/white"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_muliply"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
-                android:inputType="numberDecimal"
+
                 android:onClick="onOperationButtonClicked"
                 android:longClickable="false">
             </Button>
 
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_operation_button_background"
                 android:textSize="30sp"
                 android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_backspace"
                 android:text="@string/backspace"
                 android:onClick="onBackButtonClicked">
@@ -80,245 +87,256 @@
         </LinearLayout>
 
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/basic_row2"
-            android:layout_marginLeft="10pt"
-            android:layout_marginRight="10pt"
-            android:layout_marginTop="3pt">
+            android:layout_height="0px"
+            android:layout_weight="2"
+            android:id="@+id/basic_row2">
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
                 android:textSize="30sp"
-                android:background="@color/white"
+                android:background="@drawable/portrait_num_button_background"
                 android:text="@string/seven"
+                android:textColor="@color/black"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn7"
-                android:layout_marginRight="5dp"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
                 android:textSize="30sp"
-                android:background="@color/white"
                 android:text="@string/eight"
-                android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn8"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
+
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
                 android:textSize="30sp"
-                android:background="@color/white"
                 android:text="@string/nine"
-                android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn9"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
 
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_operation_button_background"
                 android:textSize="30sp"
-                android:text="@string/minus"
                 android:textColor="@color/white"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_minus"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:onClick="onOperationButtonClicked"
-                android:longClickable="false">
+                android:text="@string/minus"
+                android:onClick="onOperationButtonClicked">
             </Button>
-
         </LinearLayout>
-
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/basic_row3"
-            android:layout_marginLeft="10pt"
-            android:layout_marginRight="10pt"
-            android:layout_marginTop="3pt">
+            android:layout_height="0px"
+            android:layout_weight="2"
+            android:id="@+id/basic_row3">
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
                 android:textSize="30sp"
-                android:background="@color/white"
+                android:background="@drawable/portrait_num_button_background"
                 android:text="@string/four"
+                android:textColor="@color/black"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn4"
-                android:layout_marginRight="5dp"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
                 android:textSize="30sp"
-                android:background="@color/white"
                 android:text="@string/five"
-                android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn5"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
+
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
                 android:textSize="30sp"
-                android:background="@color/white"
                 android:text="@string/six"
-                android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn6"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
 
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_operation_button_background"
                 android:textSize="30sp"
-                android:text="@string/plus"
                 android:textColor="@color/white"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_plus"
-                android:layout_marginRight="5dp"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:onClick="onOperationButtonClicked"
-                android:longClickable="false">
+                android:text="@string/plus"
+                android:onClick="onOperationButtonClicked">
             </Button>
-
         </LinearLayout>
-
-
         <LinearLayout
-            android:textSize="30sp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/basic_row4"
-            android:layout_marginLeft="10pt"
-            android:layout_marginRight="10pt"
-            android:layout_marginTop="3pt">
+            android:layout_height="0px"
+            android:layout_weight="2"
+            android:id="@+id/basic_row4">
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
                 android:textSize="30sp"
-                android:background="@color/white"
+                android:background="@drawable/portrait_num_button_background"
                 android:text="@string/one"
+                android:textColor="@color/black"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn1"
-                android:layout_marginRight="5dp"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
                 android:textSize="30sp"
-                android:background="@color/white"
                 android:text="@string/two"
-                android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn2"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
+
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
                 android:textSize="30sp"
-                android:background="@color/white"
                 android:text="@string/three"
-                android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn3"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
+
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_operation_button_background"
                 android:textSize="30sp"
                 android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_paren"
-                android:longClickable="false"
-                android:onClick="onParensButtonClicked"
                 android:text="@string/paren"
-                />
+                android:onClick="onParensButtonClicked">
+            </Button>
         </LinearLayout>
-
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/basic_bottomRow"
-            android:layout_marginLeft="10pt"
-            android:layout_marginRight="10pt"
-            android:layout_marginTop="3pt">
+            android:layout_height="0px"
+            android:layout_weight="2"
+            android:id="@+id/basic_bottomRow">
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
                 android:textSize="30sp"
-                android:background="@color/white"
+                android:background="@drawable/portrait_num_button_background"
                 android:text="@string/zero"
+                android:textColor="@color/black"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn0"
-                android:layout_marginRight="5dp"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
                 android:textSize="30sp"
-                android:background="@color/white"
                 android:text="@string/decimal"
-                android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_decimal"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNumberButtonClicked"
                 android:longClickable="false">
             </Button>
+
             <Button
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
                 android:textSize="30sp"
-                android:background="@color/white"
                 android:text="@string/negate"
-                android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_negate"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
-                android:inputType="numberDecimal"
+
                 android:onClick="onNegateButtonClicked"
                 android:longClickable="false">
             </Button>
+
             <Button
-                android:textColor="@color/white"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_equal_button_background"
                 android:textSize="30sp"
-                android:background="@color/orange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0px"
                 android:id="@+id/btn_equals"
-                android:longClickable="false"
                 android:text="@string/equals"
-                android:onClick="onEqualsButtonClicked"
-                />
+                android:onClick="onEqualsButtonClicked">
+            </Button>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

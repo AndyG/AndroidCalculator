@@ -162,7 +162,7 @@
                     android:layout_height="10pt"
                     android:id="@+id/btn_clear"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onClearButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -173,7 +173,7 @@
                     android:layout_weight="1"
                     android:id="@+id/btn_divide"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onOperationButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -186,7 +186,7 @@
                     android:id="@+id/btn_muliply"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onOperationButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -216,7 +216,7 @@
                     android:id="@+id/btn7"
                     android:layout_width="match_parent"
                     android:layout_marginRight="5dp"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -227,7 +227,7 @@
                     android:layout_weight="1"
                     android:id="@+id/btn8"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -239,7 +239,7 @@
                     android:id="@+id/btn9"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -251,7 +251,7 @@
                     android:layout_weight="1"
                     android:id="@+id/btn_minus"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onOperationButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -272,7 +272,7 @@
                     android:id="@+id/btn4"
                     android:layout_marginRight="5dp"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -283,7 +283,7 @@
                     android:layout_weight="1"
                     android:id="@+id/btn5"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -295,7 +295,7 @@
                     android:id="@+id/btn6"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -307,7 +307,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_plus"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onOperationButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -329,7 +329,7 @@
                     android:id="@+id/btn1"
                     android:layout_marginRight="5dp"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -340,7 +340,7 @@
                     android:layout_weight="1"
                     android:id="@+id/btn2"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -352,7 +352,7 @@
                     android:id="@+id/btn3"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -381,7 +381,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btn0"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -392,7 +392,7 @@
                     android:layout_weight="1"
                     android:id="@+id/btn_decimal"
                     android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
@@ -405,7 +405,7 @@
                     android:id="@+id/btn_negate"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
-                    android:inputType="numberDecimal"
+
                     android:onClick="onNegateButtonClicked"
                     android:longClickable="false">
                 </Button>

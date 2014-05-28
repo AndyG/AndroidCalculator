@@ -6,22 +6,24 @@
     tools:context="myapp.example.testapp.app.AdvancedFragment">
 
     <LinearLayout
-
         android:layout_marginLeft="0dp"
         android:id="@+id/function_buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/functions_row1"
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="2"
             >
             <Button
-                android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:id="@+id/btn_sin"
@@ -30,12 +32,13 @@
                 >
             </Button>
             <Button
-                android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
                 android:layout_width="0px"
                 android:layout_weight="1"
-                android:id="@+id/btn_power"
                 android:text="@string/power"
                 android:onClick="onOperationButtonClicked"
                 >
@@ -47,9 +50,11 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent">
             <Button
-                android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:id="@+id/btn_cos"
@@ -58,9 +63,11 @@
                 >
             </Button>
             <Button
-                android:textColor="@color/white"
-                android:textSize="21sp"
-                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:id="@+id/btn_sqrt"
@@ -75,9 +82,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <Button
-                android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:id="@+id/btn_tan"
@@ -86,9 +95,11 @@
                 >
             </Button>
             <Button
-                android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:id="@+id/btn_log"
@@ -103,9 +114,11 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent">
             <Button
-                android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:id="@+id/btn_pi"
@@ -114,9 +127,11 @@
                 >
             </Button>
             <Button
-                android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/portrait_button_margin"
+                android:background="@drawable/portrait_num_button_background"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:id="@+id/btn_abs"
