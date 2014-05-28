@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -25,7 +26,7 @@
         </TextView>
         <TextView
             android:layout_marginRight="13dp"
-            android:textSize="30sp"
+            android:textSize="30dp"
             android:layout_weight="0"
             android:gravity="right"
             android:id="@+id/resultDisplay"
@@ -39,34 +40,45 @@
 
     <LinearLayout
         android:id="@+id/landscape_buttons"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         >
         <LinearLayout
-            android:layout_marginLeft="90dp"
             android:id="@+id/function_buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
             <LinearLayout
                 android:id="@+id/functions_row1"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5pt"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="2"
                 >
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
                     android:id="@+id/btn_sin"
                     android:text="@string/sin"
                     android:onClick="onFunctionButtonClicked"
                     >
                 </Button>
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
                     android:id="@+id/btn_power"
                     android:text="@string/power"
                     android:onClick="onOperationButtonClicked"
@@ -76,19 +88,31 @@
             <LinearLayout
                 android:id="@+id/functions_row2"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="2"
+                >
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
                     android:id="@+id/btn_cos"
                     android:text="@string/cos"
                     android:onClick="onFunctionButtonClicked"
                     >
                 </Button>
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
                     android:id="@+id/btn_sqrt"
                     android:text="@string/sqrt"
                     android:onClick="onFunctionButtonClicked"
@@ -98,19 +122,31 @@
             <LinearLayout
                 android:id="@+id/functions_row3"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="2"
+                >
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
                     android:id="@+id/btn_tan"
                     android:text="@string/tan"
                     android:onClick="onFunctionButtonClicked"
                     >
                 </Button>
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
                     android:id="@+id/btn_log"
                     android:text="@string/log"
                     android:onClick="onFunctionButtonClicked"
@@ -120,19 +156,31 @@
             <LinearLayout
                 android:id="@+id/functions_row4"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="2"
+                >
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
                     android:id="@+id/btn_pi"
                     android:text="@string/pi"
                     android:onClick="onSpecialOperandButtonClicked"
                     >
                 </Button>
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
                     android:id="@+id/btn_abs"
                     android:text="@string/abs"
                     android:onClick="onFunctionButtonClicked"
@@ -143,59 +191,70 @@
 
 
         <LinearLayout
-            android:id="@+id/basicButtons"
+            android:layout_margin="10dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5pt"
+            android:id="@+id/basic_buttons"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0px"
+                android:layout_weight="2"
                 android:id="@+id/basic_topRow">
                 <Button
-                    android:background="@color/liteblue"
-                    android:text="@string/clear"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:textColor="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_clear_button_background"
+                    android:text="@string/clear"
                     android:layout_weight="1"
-                    android:layout_height="10pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_clear"
-                    android:layout_width="match_parent"
-
                     android:onClick="onClearButtonClicked"
                     android:longClickable="false">
                 </Button>
                 <Button
+                    android:background="@drawable/landscape_operation_button_background"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/divide"
                     android:textColor="@color/white"
-                    android:layout_height="15pt"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_divide"
-                    android:layout_width="match_parent"
 
                     android:onClick="onOperationButtonClicked"
                     android:longClickable="false">
                 </Button>
 
                 <Button
+                    android:background="@drawable/landscape_operation_button_background"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/multiply"
                     android:textColor="@color/white"
-                    android:layout_height="15pt"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_muliply"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="5dp"
 
                     android:onClick="onOperationButtonClicked"
                     android:longClickable="false">
                 </Button>
 
                 <Button
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_operation_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:textColor="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="15pt"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_backspace"
                     android:text="@string/backspace"
                     android:onClick="onBackButtonClicked">
@@ -205,222 +264,254 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/basic_row2"
-                android:layout_marginTop="3pt">
+                android:layout_height="0px"
+                android:layout_weight="2"
+                android:id="@+id/basic_row2">
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
+                    android:background="@drawable/landscape_num_button_background"
                     android:text="@string/seven"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
-                    android:layout_height="15pt"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn7"
-                    android:layout_width="match_parent"
-                    android:layout_marginRight="5dp"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/eight"
-                    android:layout_height="15pt"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn8"
-                    android:layout_width="match_parent"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
+
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/nine"
-                    android:layout_height="15pt"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn9"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="5dp"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
 
                 <Button
-                    android:text="@string/minus"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_operation_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:textColor="@color/white"
-                    android:layout_height="15pt"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_minus"
-                    android:layout_width="match_parent"
-
-                    android:onClick="onOperationButtonClicked"
-                    android:longClickable="false">
+                    android:text="@string/minus"
+                    android:onClick="onOperationButtonClicked">
                 </Button>
-
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="15pt"
-                android:id="@+id/basic_row3"
-                android:layout_marginTop="3pt">
+                android:layout_height="0px"
+                android:layout_weight="2"
+                android:id="@+id/basic_row3">
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
+                    android:background="@drawable/landscape_num_button_background"
                     android:text="@string/four"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn4"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="match_parent"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/five"
-                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn5"
-                    android:layout_width="match_parent"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
+
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/six"
-                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn6"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="5dp"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
 
                 <Button
-                    android:text="@string/plus"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_operation_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:textColor="@color/white"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_plus"
-                    android:layout_width="match_parent"
-
-                    android:onClick="onOperationButtonClicked"
-                    android:longClickable="false">
+                    android:text="@string/plus"
+                    android:onClick="onOperationButtonClicked">
                 </Button>
-
             </LinearLayout>
-
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="15pt"
-                android:id="@+id/basic_row4"
-                android:layout_marginTop="3pt">
+                android:layout_height="0px"
+                android:layout_weight="2"
+                android:id="@+id/basic_row4">
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
+                    android:background="@drawable/landscape_num_button_background"
                     android:text="@string/one"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn1"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="match_parent"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/two"
-                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn2"
-                    android:layout_width="match_parent"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
+
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/three"
-                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn3"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="5dp"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
-                <Button
-                    android:textColor="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/btn_paren"
-                    android:longClickable="false"
-                    android:onClick="onParensButtonClicked"
-                    android:text="@string/paren"
-                    />
-            </LinearLayout>
 
+                <Button
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_operation_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
+                    android:id="@+id/btn_paren"
+                    android:text="@string/paren"
+                    android:onClick="onParensButtonClicked">
+                </Button>
+            </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="15pt"
-                android:id="@+id/basic_bottomRow"
-                android:layout_marginTop="3pt">
+                android:layout_height="0px"
+                android:layout_weight="2"
+                android:id="@+id/basic_bottomRow">
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
+                    android:background="@drawable/landscape_num_button_background"
                     android:text="@string/zero"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn0"
-                    android:layout_width="match_parent"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
                 <Button
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/decimal"
-                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_decimal"
-                    android:layout_width="match_parent"
 
                     android:onClick="onNumberButtonClicked"
                     android:longClickable="false">
                 </Button>
+
                 <Button
-                    android:textSize="20sp"
-                    android:background="@color/white"
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_num_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:text="@string/negate"
-                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_negate"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="5dp"
 
                     android:onClick="onNegateButtonClicked"
                     android:longClickable="false">
                 </Button>
+
                 <Button
+                    android:layout_margin="@dimen/landscape_button_margin"
+                    android:background="@drawable/landscape_equal_button_background"
+                    android:textSize="@dimen/landscape_phone_basic_textSize"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:background="@color/orange"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_width="0px"
                     android:id="@+id/btn_equals"
-                    android:longClickable="false"
                     android:text="@string/equals"
-                    android:onClick="onEqualsButtonClicked"
-                    />
+                    android:onClick="onEqualsButtonClicked">
+                </Button>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

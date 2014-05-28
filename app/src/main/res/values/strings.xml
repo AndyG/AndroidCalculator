@@ -19,7 +19,7 @@
     <string name="divide">/</string>
     <string name="equals">=</string>
     <string name="clear">C</string>
-    <string name="backspace">B</string>
+    <string name="backspace">&lt;</string>
     <string name="paren">( )</string>
     <string name="decimal">.</string>
     <string name="negate">+/-</string>

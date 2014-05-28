@@ -3,4 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="portrait_button_margin">2dp</dimen>
+    <dimen name="landscape_button_margin">1dp</dimen>
+    <dimen name="landscape_phone_basic_textSize">20dp</dimen>
 </resources>
