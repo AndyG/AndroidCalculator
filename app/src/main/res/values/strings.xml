@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Andy\'s Calculator</string>
     <string name="action_settings">Settings</string>
     <string name="zero">0</string>
@@ -30,4 +31,6 @@
     <string name="log">log</string>
     <string name="sqrt">sqrt</string>
     <string name="pi">π</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -1,7 +1,11 @@
 package myapp.example.testapp.app;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -13,29 +17,35 @@ import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements BasicFragment.OnFragmentInteractionListener,
+        Container.OnFragmentInteractionListener, AdvancedFragment.OnFragmentInteractionListener{
 
     private int BUTTON_VIB_LENGTH=1;
     private Vibrator myVib;
-    private Boolean startedTypingNumber;
-    private Boolean startedBuildingExpression;
-    private TextView currentOperandDisplay;
     private TextView resultDisplay;
     private TextView currentExpressionDisplay;
     private Calculator calculator;
+    private Boolean showingAdvanced = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myVib = (Vibrator)this.getSystemService(VIBRATOR_SERVICE);
-
         setContentView(R.layout.activity_main);
+
+        FrameLayout frame = (FrameLayout)findViewById(R.id.portrait_bottomhalf);
+
+        if(savedInstanceState==null){
+            BasicFragment bf = new BasicFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.add(frame.getId(),bf).commit();
+        }
+
+        myVib = (Vibrator)this.getSystemService(VIBRATOR_SERVICE);
         Log.w("debugMessage", "created main activity");
-        startedTypingNumber = false;
-        startedBuildingExpression=false;
         currentExpressionDisplay = (TextView)findViewById(R.id.currentExpressionDisplay);
         resultDisplay = (TextView)findViewById(R.id.resultDisplay);
         resultDisplay.setVisibility(View.GONE);
@@ -254,5 +264,35 @@ public class MainActivity extends Activity {
         }else{
             return true;
         }
+    }
+
+    public void loadAdvancedFragment(View v){
+        System.out.println("Pressed load advanced fragment.");
+
+        AdvancedFragment af = new AdvancedFragment();
+        FragmentManager fm = getFragmentManager();
+        String tag = "advancedFragment";
+        addFragmentOnlyOnce(fm,af,tag);
+    }
+
+    //stolen and modified from stackoverflow user Tom anMoney :)
+    public  void addFragmentOnlyOnce(FragmentManager fragmentManager, Fragment fragment, String tag) {
+        // Make sure the current transaction finishes first
+        fragmentManager.executePendingTransactions();
+
+        // If there is no fragment yet with this tag...
+        if (fragmentManager.findFragmentByTag(tag) == null) {
+            // Add it
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.none, R.anim.none, R.anim.slide_out_left);
+            FrameLayout frame = (FrameLayout) findViewById(R.id.portrait_bottomhalf);
+            transaction.add(frame.getId(),fragment,tag);
+            transaction.addToBackStack(tag);
+            transaction.commit();
+        }
+    }
+
+    public void onFragmentInteraction(Uri uri){
+        Toast.makeText(this, "Wheeee!",Toast.LENGTH_SHORT).show();
     }
 }
