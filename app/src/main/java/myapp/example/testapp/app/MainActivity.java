@@ -29,7 +29,6 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
     private TextView resultDisplay;
     private TextView currentExpressionDisplay;
     private Calculator calculator;
-    private Boolean showingAdvanced = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

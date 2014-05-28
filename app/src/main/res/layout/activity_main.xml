@@ -36,16 +36,30 @@
         </TextView>
 
     </LinearLayout>
-    <FrameLayout
-        android:id="@+id/portrait_bottomhalf"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:id="@+id/fragmentsContainer"
+
+        <Button
+            android:layout_height="70dp"
+            android:layout_width="15dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/btn_loadAdvanced"
+            android:onClick="loadAdvancedFragment"
+            android:text=">"
+            />
+        <FrameLayout
+            android:id="@+id/portrait_bottomhalf"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </LinearLayout>
-    </FrameLayout>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/fragmentsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 </LinearLayout>

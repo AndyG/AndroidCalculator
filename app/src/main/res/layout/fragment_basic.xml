@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     >
-
-    <Button
-        android:layout_height="70dp"
-        android:layout_width="15dp"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/btn_loadAdvanced"
-        android:onClick="loadAdvancedFragment"
-        android:text=">"
-        />
-
-
     <LinearLayout
         android:id="@+id/basic_buttons"
         android:layout_width="match_parent"
