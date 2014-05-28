@@ -15,22 +15,26 @@
         <LinearLayout
             android:id="@+id/functions_row1"
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
             >
             <Button
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:id="@+id/btn_sin"
                 android:text="@string/sin"
                 android:onClick="onFunctionButtonClicked"
                 >
             </Button>
             <Button
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:id="@+id/btn_power"
                 android:text="@string/power"
                 android:onClick="onOperationButtonClicked"
@@ -40,21 +44,25 @@
         <LinearLayout
             android:id="@+id/functions_row2"
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent">
             <Button
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:id="@+id/btn_cos"
                 android:text="@string/cos"
                 android:onClick="onFunctionButtonClicked"
                 >
             </Button>
             <Button
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="21sp"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:id="@+id/btn_sqrt"
                 android:text="@string/sqrt"
                 android:onClick="onFunctionButtonClicked"
@@ -67,18 +75,22 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <Button
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:id="@+id/btn_tan"
                 android:text="@string/tan"
                 android:onClick="onFunctionButtonClicked"
                 >
             </Button>
             <Button
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:id="@+id/btn_log"
                 android:text="@string/log"
                 android:onClick="onFunctionButtonClicked"
@@ -88,21 +100,25 @@
         <LinearLayout
             android:id="@+id/functions_row4"
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent">
             <Button
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:id="@+id/btn_pi"
                 android:text="@string/pi"
                 android:onClick="onSpecialOperandButtonClicked"
                 >
             </Button>
             <Button
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:id="@+id/btn_abs"
                 android:text="@string/abs"
                 android:onClick="onFunctionButtonClicked"
