@@ -35,14 +35,12 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FrameLayout frame = (FrameLayout)findViewById(R.id.portrait_bottomhalf);
-
-        if(savedInstanceState==null){
-            BasicFragment bf = new BasicFragment();
+        if(isPortrait()){
+            BasicFragment basic = new BasicFragment();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.add(frame.getId(),bf).commit();
+            ft.add(R.id.portrait_bottomhalf,basic);
+            ft.commit();
         }
-
         myVib = (Vibrator)this.getSystemService(VIBRATOR_SERVICE);
         Log.w("debugMessage", "created main activity");
         currentExpressionDisplay = (TextView)findViewById(R.id.currentExpressionDisplay);
@@ -270,7 +268,7 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
 
         AdvancedFragment af = new AdvancedFragment();
         FragmentManager fm = getFragmentManager();
-        String tag = "advancedFragment";
+        String tag = af.getTag();
         addFragmentOnlyOnce(fm,af,tag);
     }
 
@@ -293,5 +291,15 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
 
     public void onFragmentInteraction(Uri uri){
         Toast.makeText(this, "Wheeee!",Toast.LENGTH_SHORT).show();
+    }
+
+    private Boolean isPortrait(){
+        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int curRotation = display.getRotation();
+        //portrait
+        if(curRotation== Surface.ROTATION_0 || curRotation==Surface.ROTATION_180)
+            return true;
+        else
+            return false;
     }
 }
