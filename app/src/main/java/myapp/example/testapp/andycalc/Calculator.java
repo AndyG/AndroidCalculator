@@ -226,11 +226,12 @@ public class Calculator implements Parcelable {
             Integer decimalIndex = in.indexOf(".");
             Integer E_Index = in.indexOf("E");
 
-            //want to put E 5 points after decimal.
+            //want to put E 4 points after decimal.
             if(E_Index-decimalIndex<=4){
                 return(in);
             }
 
+            //E is more than 4 points away from the decimal. Put it exactly 4 points away.
             String resultString = in.substring(0,decimalIndex+4);
             resultString = resultString+in.substring(E_Index);
             return(resultString);
