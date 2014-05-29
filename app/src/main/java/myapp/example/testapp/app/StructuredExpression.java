@@ -32,6 +32,7 @@ class ExpressionBlock{
     }
 }
 
+//TODO: add addOpenParen, addCloseParen functions instead of having to manually manage openParensCount
 public class StructuredExpression {
     private ArrayList<ExpressionBlock> expressionArray;
     private Integer openParensCount;
@@ -42,78 +43,23 @@ public class StructuredExpression {
     }
 
 
-    //TODO: much of the code in this function SHOULD be useless as calls to this function are more regulated now.
-    //...that said, I'm going to leave it now because most of the testers/testing I have done is
-    //with the "probably useless" code and it is time to sleep before the interview.
+    //this is the only way other classes can access the expressionArray.
+    //calls to this function are only made when the Calculator needs add the last result as a new
+    //operand. this function will soon be deprecated.
     public Boolean addExpressionBlock(String blockType, String value){
-
         ExpressionBlock lastBlock = null;
         if(!expressionArray.isEmpty()) {
             lastBlock = expressionArray.get(expressionArray.size() - 1);
         }
 
-        //empty expressionArray, can only accept open parens and operands
-        if(lastBlock==null && (blockType.equals("operand") || blockType.equals("openParen"))){
+        //empty expressionArray, can only accept operands.
+        if(lastBlock==null && blockType.equals("operand")){
             expressionArray.add(new ExpressionBlock(blockType,value));
             return true;
-        }
-        //empty expressionArray but got operator
-        else if(lastBlock==null && (blockType.equals("operator") || (blockType.equals("closeParen")))){
-            System.out.println("Can't append "+blockType+" to empty expression array.");
+        }else{
+            System.out.println("GOT TO BOTTOM OF ADDEXPRESSIONBLOCK");
             return false;
         }
-        //nonempty expressionArray: handle operator
-        if(blockType.equals("operator")){
-            //putting in operator but the last ExpressionBlock was an operator.
-            //replace last ExpressionBlock with the new operator
-            if(lastBlock.blockType.equals("operator")){
-                expressionArray.set(expressionArray.size() - 1, new ExpressionBlock(blockType, value));
-                return true;
-            }
-            //putting in operator when last block was an operand.
-            else if(lastBlock.blockType.equals("operand")){
-                expressionArray.add(new ExpressionBlock(blockType,value));
-                return true;
-            }
-            //putting in operator when last block was an open paren
-            else if(lastBlock.blockType.equals("openParen")){
-                return false;
-            }
-            //putting in operator when last block was a closeParen
-            else if(lastBlock.blockType.equals("closeParen")){
-                expressionArray.add(new ExpressionBlock(blockType,value));
-                return true;
-            }
-        }
-        else if(blockType.equals("operand")){
-            //putting in operand, last block was an operator. append.
-            if(lastBlock.blockType.equals("operator")){
-                expressionArray.add(new ExpressionBlock(blockType,value));
-                return true;
-            }
-            //putting in operand but the last ExpressionBlock was an openParen.
-            else if(lastBlock.blockType.equals("openParen")){
-                expressionArray.add(new ExpressionBlock(blockType,value));
-                return true;
-            }
-            //putting in operand but the last ExpressionBlock was a closeParen.
-            else if(lastBlock.blockType.equals("closeParen")){
-                expressionArray.add(new ExpressionBlock("operator","*"));
-                expressionArray.add(new ExpressionBlock(blockType,value));
-                return true;
-            }
-            //putting in operand but the last ExpressionBlock was an operand.
-            //put a multiplication between them.
-            else if(lastBlock.blockType.equals("operand")){
-                expressionArray.add(new ExpressionBlock("operand","*"));
-                expressionArray.add(new ExpressionBlock(blockType, value));
-                return true;
-            }
-        }
-
-        //should never get here
-        System.out.println("GOT TO BOTTOM OF ADDEXPRESSIONBLOCK");
-        return false;
     }
 
 
