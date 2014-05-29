@@ -118,12 +118,7 @@ public class Calculator implements Parcelable {
             currentStructuredExpression = new StructuredExpression();
             currentStructuredExpression.addExpressionBlock("operand", lastResult);
         }
-        if(currentStructuredExpression.currentlyTypingNumber()){
-            currentStructuredExpression.negateOperand();
-        }
-        if(currentStructuredExpression.currentlyTypingSpecialOperand()){
-            currentStructuredExpression.negateSpecialOperand();
-        }
+        currentStructuredExpression.negateOperand();
         resultDisplayState=0;
     }
 

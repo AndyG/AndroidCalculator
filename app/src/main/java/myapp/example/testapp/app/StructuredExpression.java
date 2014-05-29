@@ -117,14 +117,27 @@ public class StructuredExpression {
     }
 
 
+    //TODO: consider, is it really necessary to multiply for normal operands either?
     public Boolean negateOperand(){
         if(expressionArray.isEmpty()){
             System.out.println("can't negate empty expression");
             return false;
         }
-
         ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
-        if(lastBlock.blockType.equals("operand")){
+
+        //in negating a specialOperand, we don't want to actually multiply -- prepending or removing
+        //the negative sign is good enough.
+        if(lastBlock.blockType.equals("specialOperand")){
+            String val = lastBlock.value;
+            if(val.startsWith("-")){
+                val = val.substring(1);
+            }else{
+                val = "-"+val;
+            }
+            lastBlock.value = val;
+            expressionArray.set(expressionArray.size()-1,lastBlock);
+            return true;
+        }else if(lastBlock.blockType.equals("operand")){
             //multiply this operand by -1
             Double val = null;
             try {
@@ -137,6 +150,8 @@ public class StructuredExpression {
                 return false;
             }
             Double negatedVal = val*(-1);
+
+            //this just keeps "1" from turning into "-1.0"
             if(negatedVal.doubleValue()==negatedVal.intValue()){
                 lastBlock.value = Integer.toString(negatedVal.intValue());
             }else{
@@ -150,38 +165,29 @@ public class StructuredExpression {
         }
     }
 
-    //this is different from negateOperand because we don't want to actually multiply -- prepending or removing
-    //the negative sign is good enough.
-    //TODO: consider, is it really necessary to multiply for normal operands either?
-    public Boolean negateSpecialOperand(){
-        if(expressionArray.isEmpty()){
-            System.out.println("can't negate empty expression");
-            return false;
-        }
-
-        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
-        if(lastBlock.blockType.equals("specialOperand")){
-            //multiply this operand by -1
-            String val = lastBlock.value;
-            if(val.startsWith("-")){
-                val = val.substring(1);
-            }else{
-                val = "-"+val;
-            }
-            lastBlock.value = val;
-            expressionArray.set(expressionArray.size()-1,lastBlock);
-            return true;
-        }else{
-            System.out.println("Can't negate non-special-operand.");
-            return false;
-        }
-    }
-
     private String removeParentheses(String s){
         s = s.replace("(","");
         return(s.replace(")",""));
     }
 
+    //for use when I have parentheses
+    public Boolean currentlyTypingNumber(){
+        if(expressionArray.isEmpty()){
+            return false;
+        }
+
+        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
+
+        //if the last block is not an operand or is an operand and ends with ),
+        //then we are not currently typing a number
+        if(!lastBlock.blockType.equals("operand")){
+            return false;
+        }else if(lastBlock.value.endsWith(")")){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     //for use when I have parentheses
     public Boolean currentlyTypingSpecialOperand(){
