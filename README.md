@@ -7,6 +7,11 @@ The meat of the code is in the three files MainActivity.java, Calculator.java, a
 
 I stuck to a Model-View-Controller architecture for this, where the view is MainActivity, the controller is Calculator, and the model is Structured Expression.
 
+![alt text](http://i59.tinypic.com/1zwlyxh.jpg "Main Activity")
+![alt text](http://i62.tinypic.com/2ldg6jr.jpg "Main Activity with Scientific Drawer out")
+![alt text](http://i58.tinypic.com/jhd6ra.jpg "Landscape Main Activity")
+
+
 ##Structured Expression
 
 Structured Expression is the meat of this calculator. As the name suggests, it provides structure to the expressions that the user builds, so that the calculator can safely make decisions about how to handle new input. At its core, it is an array of ExpressionBlocks, each of which has a String value and a String "blockType." The blockType is the tag that defines an ExpressionBlock as either an operator, an operand, an openParen, a closeParen, a function, or a "specialOperand" (constant, like pi).
