@@ -41,6 +41,12 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
             ft.add(R.id.portrait_bottomhalf,basic);
             ft.commit();
         }
+
+        //this is kind of a hack that works because there is only one fragment ever on the backstack.
+        //without this line, if you open the advanced tray, change orientation and change back,
+        //the advanced tray button will no longer work.
+        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
         myVib = (Vibrator)this.getSystemService(VIBRATOR_SERVICE);
         Log.w("debugMessage", "created main activity");
         currentExpressionDisplay = (TextView)findViewById(R.id.currentExpressionDisplay);
