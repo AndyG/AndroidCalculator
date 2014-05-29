@@ -124,11 +124,8 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         //set font size of displays
         Integer curLength = currentExpressionDisplay.getText().toString().length();
 
-        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        int curRotation = display.getRotation();
-
         //portrait
-        if(curRotation== Surface.ROTATION_0 || curRotation==Surface.ROTATION_180) {
+        if(isPortrait()){
             if (curLength < 11) {
                 currentExpressionDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,50);
                 resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,60);
@@ -271,8 +268,8 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         }
     }
 
+    //necessary implementation
     public void onFragmentInteraction(Uri uri){
-        Toast.makeText(this, "Wheeee!",Toast.LENGTH_SHORT).show();
     }
 
     private Boolean isPortrait(){
