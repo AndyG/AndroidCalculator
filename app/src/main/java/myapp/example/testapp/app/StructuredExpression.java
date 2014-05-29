@@ -321,6 +321,7 @@ public class StructuredExpression {
 
 
     public void handleBackspace(){
+        //empty case, backspace does nothing
         if(expressionArray.isEmpty()){
             return;
         }
@@ -355,6 +356,8 @@ public class StructuredExpression {
     }
 
     public Boolean handleFunction(String functionText){
+
+        //empty case, add the function
         if(expressionArray.isEmpty()){
             expressionArray.add(new ExpressionBlock("function",functionText));
             expressionArray.add(new ExpressionBlock("openParen","("));
@@ -402,6 +405,8 @@ public class StructuredExpression {
     }
 
     public Boolean handleSpecialOperand(String opText){
+
+        //empty case
         if(expressionArray.isEmpty()){
             expressionArray.add(new ExpressionBlock("specialOperand",opText));
             return true;
@@ -438,6 +443,7 @@ public class StructuredExpression {
     }
 
     public Boolean handleParens(){
+        //empty case
         if(expressionArray.isEmpty()){
             expressionArray.add(new ExpressionBlock("openParen","("));
             openParensCount++;
@@ -456,7 +462,10 @@ public class StructuredExpression {
             expressionArray.add(new ExpressionBlock("openParen","("));
             openParensCount++;
             return true;
-        }else if(lastBlockType.equals("operand")||lastBlockType.equals("closeParen")||lastBlockType.equals("specialOperand")){
+        }
+        //on operands, operators, and specialOperands, if there is already an open paren, close it.
+        //otherwise, create a new open parenthesis with a multiplication operator preceding it.
+        else if(lastBlockType.equals("operand")||lastBlockType.equals("closeParen")||lastBlockType.equals("specialOperand")){
             if(openParensCount>0){
                 expressionArray.add(new ExpressionBlock("closeParen",")"));
                 openParensCount--;
@@ -485,6 +494,7 @@ public class StructuredExpression {
         }
     }
 
+    //simple function which turns the expressionArray into a human-readable mathematical expression.
     @Override
     public String toString(){
         StringBuilder buf = new StringBuilder();
@@ -512,6 +522,7 @@ public class StructuredExpression {
     }
 
     //create StructuredExpression from string array
+    //for use when creating StructuredExpression from Calculator Parcel
     public StructuredExpression(String[] src){
             expressionArray = new ArrayList<ExpressionBlock>();
             openParensCount=0;
@@ -527,6 +538,7 @@ public class StructuredExpression {
     }
 
     //fix operands which have either nothing 0 pre-decimal point or nothing after the decimal point
+    //this is what makes something like ".+" turn into "0.0+"
     private String formatDecimalOperand(String num) {
         //no decimal, no problem
         if (!num.contains(".")) {
@@ -540,7 +552,6 @@ public class StructuredExpression {
         //split string on decimal. length 1 implies no post-decimal info.
         //length 2 implies either no pre-decimal info or info on both sides (hence test for emptiness of left side).
         String[] splitNum = num.split("\\.");
-        Boolean changed = false;
 
         if (splitNum.length == 1) {
             return (num + "0");
