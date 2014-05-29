@@ -160,11 +160,13 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
     }
 
     public void onSpecialOperandButtonClicked(View v){
-        myVib.vibrate(BUTTON_VIB_LENGTH);
-        Button buttonPressed = (Button) v;
-        calculator.pressSpecialOperand(buttonPressed.getText().toString());
-        resultDisplay.setVisibility(View.GONE);
-        updateDisplays();
+        if(filterOnExpressionLength("specialOperand")) {
+            myVib.vibrate(BUTTON_VIB_LENGTH);
+            Button buttonPressed = (Button) v;
+            calculator.pressSpecialOperand(buttonPressed.getText().toString());
+            resultDisplay.setVisibility(View.GONE);
+            updateDisplays();
+        }
     }
 
     public void onOperationButtonClicked(View v){
@@ -205,6 +207,10 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
 
     public void onEqualsButtonClicked(View v){
         myVib.vibrate(BUTTON_VIB_LENGTH);
+        //equals sign with no expression doesn't send signal to calculator.
+        if(currentExpressionDisplay.getText().toString().isEmpty()){
+            return;
+        }
         calculator.pressEquals();
         resultDisplay.setVisibility(View.VISIBLE);
         updateDisplays();
@@ -224,7 +230,8 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         updateDisplays();
     }
 
-    //return false if current expression is too long or
+    //return false if current expression is too long.
+    //this is called on buttons which extend the length of the expression.
     public Boolean filterOnExpressionLength(String buttonType){
         Integer currentExpressionLength = currentExpressionDisplay.getText().toString().length();
 
