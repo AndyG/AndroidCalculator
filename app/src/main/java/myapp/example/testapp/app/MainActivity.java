@@ -89,32 +89,6 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         return super.onOptionsItemSelected(item);
     }
 
-    //truncate AFTER decimal on non-scientific notation input
-    private String truncate(String in){
-        //scientific notation or infinity, don't want to truncate
-        if(in.contains("E") || in.contains("Infinity") || !in.contains(".")){
-            return(in);
-        }
-
-        //in contains "." and isn't scientific notation
-
-        String[] split_in = in.split("\\.");
-        System.out.println(split_in.length);
-        try {
-            String pre_decimal = split_in[0];
-            String post_decimal = split_in[1];
-            if(post_decimal.length()>6){
-                return(pre_decimal+"."+post_decimal.substring(0,6));
-            }else{
-                return(in);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-            return(in);
-        }
-
-    }
-
     public void updateDisplays() {
         String[] currentCalculatorState = calculator.getStringValues();
         //0 is current expression string
@@ -131,7 +105,7 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
             resultDisplay.setVisibility(View.GONE);
         }
         if (currentCalculatorState[2].equals("2") && currentCalculatorState[1] != null) {
-            resultDisplay.setText(truncate(currentCalculatorState[1]));
+            resultDisplay.setText(currentCalculatorState[1]);
             resultDisplay.setVisibility(View.VISIBLE);
         } else if (currentCalculatorState[2].equals("1")) {
             resultDisplay.setText("Invalid");
@@ -144,20 +118,23 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         setFontSizes();
     }
 
+    //Eventually needs to be updated to set text size dynamically based on the size of the screen
+    //and not just the orientation.
     private void setFontSizes(){
         //set font size of displays
         Integer curLength = currentExpressionDisplay.getText().toString().length();
 
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         int curRotation = display.getRotation();
+
         //portrait
         if(curRotation== Surface.ROTATION_0 || curRotation==Surface.ROTATION_180) {
-            if (curLength < 12) {
+            if (curLength < 11) {
                 currentExpressionDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,50);
-                resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,70);
+                resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,60);
             } else {
                 currentExpressionDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
-                resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,70);
+                resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,60);
             }
         }
         //landscape
@@ -170,7 +147,6 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
                 resultDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
             }
         }
-
     }
 
     public void onNumberButtonClicked(View v){
@@ -261,7 +237,7 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
                 return true;
             }
         }
-        if(currentExpressionLength >= 35){
+        if(currentExpressionLength >= 30){
             Toast.makeText(this,"Current expression too long.",Toast.LENGTH_SHORT).show();
             return false;
         }else{

@@ -50,7 +50,7 @@ public class Calculator implements Parcelable {
             return("="+result);
         }else{
             resultDisplayState = 2;
-            lastResult = res.toString();
+            lastResult = truncate(res.toString());
             return("="+res.toString());
         }
     }
@@ -195,4 +195,53 @@ public class Calculator implements Parcelable {
         currentStructuredExpression = new StructuredExpression(structuredExprArray);
         System.out.println("Read from parcel. resultDisplayState: "+resultDisplayState);
     }
+
+
+
+    //truncate AFTER decimal on non-scientific notation input
+    private String truncate(String in){
+        //infinity or large integer, don't want to truncate
+        if(in.contains("Infinity") || !in.contains(".")){
+            return(in);
+        }
+
+        //scientific notation, move "E" back to 5 points after decimal
+        if(in.contains("E")){
+            //if somehow the input does not contain a decimal, return in. that shouldn't happen.
+            if(!in.contains(".")){
+                return(in);
+            }
+
+            Integer decimalIndex = in.indexOf(".");
+            Integer E_Index = in.indexOf("E");
+
+            //want to put E 5 points after decimal.
+            if(E_Index-decimalIndex<=4){
+                return(in);
+            }
+
+            String resultString = in.substring(0,decimalIndex+4);
+            resultString = resultString+in.substring(E_Index);
+            return(resultString);
+        }
+
+        //in contains "." and isn't scientific notation
+
+        String[] split_in = in.split("\\.");
+        System.out.println(split_in.length);
+        try {
+            String pre_decimal = split_in[0];
+            String post_decimal = split_in[1];
+            if(post_decimal.length()>6){
+                return(pre_decimal+"."+post_decimal.substring(0,6));
+            }else{
+                return(in);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return(in);
+        }
+
+    }
+
 }
