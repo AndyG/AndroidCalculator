@@ -42,6 +42,9 @@ public class StructuredExpression {
     }
 
 
+    //TODO: much of the code in this function SHOULD be useless as calls to this function are more regulated now.
+    //...that said, I'm going to leave it now because most of the testers/testing I have done is
+    //with the "probably useless" code and it is time to sleep before the interview.
     public Boolean addExpressionBlock(String blockType, String value){
 
         ExpressionBlock lastBlock = null;
