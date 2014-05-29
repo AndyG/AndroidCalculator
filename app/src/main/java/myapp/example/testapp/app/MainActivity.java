@@ -242,6 +242,8 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         }
     }
 
+    //loads the scientific tray into view.
+    //makes use of addFragmentOnlyOnce so spamming the button doesn't add multiple fragments.
     public void loadAdvancedFragment(View v){
         System.out.println("Pressed load advanced fragment.");
 
