@@ -268,7 +268,7 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
 
         AdvancedFragment af = new AdvancedFragment();
         FragmentManager fm = getFragmentManager();
-        String tag = af.getTag();
+        String tag = "advancedFragment";
         addFragmentOnlyOnce(fm,af,tag);
     }
 
