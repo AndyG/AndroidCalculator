@@ -89,11 +89,15 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         return super.onOptionsItemSelected(item);
     }
 
+    //called after every button press
+    //updates the result display visibility(and text) and the expression text.
     public void updateDisplays() {
         String[] currentCalculatorState = calculator.getStringValues();
         //0 is current expression string
         //1 is last result
         //2 is result display state (0, 1, or 2)
+
+        //there is something to display in current expression
         if (currentCalculatorState[0] != null) {
             String res = currentCalculatorState[0];
             //this is okay because for now there is only one special operand (constant).
@@ -101,20 +105,22 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
             res = res.replace("#{PI}", "π");
             currentExpressionDisplay.setText(res);
         }
+
+        //there is no result to display
         if(currentCalculatorState[2].equals("0")){
             resultDisplay.setVisibility(View.GONE);
         }
+
+        //there is a successful result to display
         if (currentCalculatorState[2].equals("2") && currentCalculatorState[1] != null) {
             resultDisplay.setText(currentCalculatorState[1]);
             resultDisplay.setVisibility(View.VISIBLE);
-        } else if (currentCalculatorState[2].equals("1")) {
+        }
+        //there is an unsuccessful result to display
+        else if (currentCalculatorState[2].equals("1")) {
             resultDisplay.setText("Invalid");
             resultDisplay.setVisibility(View.VISIBLE);
-        }else{
-            System.out.println("Got here somehow...");
-            System.out.println("result display state: "+currentCalculatorState[1]);
         }
-
         setFontSizes();
     }
 
