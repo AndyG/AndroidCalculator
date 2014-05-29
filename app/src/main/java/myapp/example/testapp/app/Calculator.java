@@ -61,6 +61,7 @@ public class Calculator implements Parcelable {
      * Otherwise, append this number to the currentExpression.
      */
     public String pressNumber(String num){
+        //create new expression if user types specialOperand after evaluation
         if(resultDisplayState==2){
             currentStructuredExpression = new StructuredExpression();
         }
@@ -124,9 +125,15 @@ public class Calculator implements Parcelable {
 
     //expand to handle other specialOperands later (constants)
     public void pressSpecialOperand(String opText){
-        resultDisplayState=0;
+        //create new expression if user types specialOperand after evaluation
+        if(resultDisplayState==2){
+            currentStructuredExpression = new StructuredExpression();
+        }
+        resultDisplayState = 0;
         if(opText.equals("π")){
             currentStructuredExpression.handleSpecialOperand("#{PI}");
+        }else{
+            System.out.println("Unhandled special operand: "+opText);
         }
     }
 
