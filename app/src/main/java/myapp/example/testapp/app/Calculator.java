@@ -57,7 +57,7 @@ public class Calculator implements Parcelable {
 
     /**
      * Handles pressing of number keys (and '.').
-     * If there is a decimal in the currentExpression already, ignore the button press.
+     * If there is a decimal in the currentExpression already or the operand is too long, ignore the button press.
      * Otherwise, append this number to the currentExpression.
      */
     public String pressNumber(String num){
@@ -66,6 +66,7 @@ public class Calculator implements Parcelable {
         }
         resultDisplayState = 0;
         //get string response from current operand
+        //ensures we don't make an operand too long.
         String response = currentStructuredExpression.operandState();
         if(response==null) {
             currentStructuredExpression.handleOperand(num);
@@ -93,6 +94,8 @@ public class Calculator implements Parcelable {
     }
 
     public void pressFunction(String functionText){
+        //if we are displaying a result and press a function, use the
+        //old result as a multiplicand with this function
         if(resultDisplayState==2){
             currentStructuredExpression = new StructuredExpression();
             currentStructuredExpression.addExpressionBlock("operand",lastResult);
@@ -107,8 +110,10 @@ public class Calculator implements Parcelable {
         evaluateCurrentExpression();
     }
 
-    //need to make this handle specialOperands
+
     public void pressNegate(){
+        //if we are displaying a result and press negate, use the
+        //old result as a the thing we are negating
         if(resultDisplayState==2){
             currentStructuredExpression = new StructuredExpression();
             currentStructuredExpression.addExpressionBlock("operand", lastResult);
@@ -122,7 +127,9 @@ public class Calculator implements Parcelable {
         resultDisplayState=0;
     }
 
+    //expand to handle other specialOperands later (constants)
     public void pressSpecialOperand(String opText){
+        resultDisplayState=0;
         if(opText.equals("π")){
             currentStructuredExpression.handleSpecialOperand("#{PI}");
         }
@@ -199,6 +206,8 @@ public class Calculator implements Parcelable {
 
 
     //truncate AFTER decimal on non-scientific notation input
+    //this function is here instead of MainActivity so the truncated values can be used as the operands
+    //to subsequent expressions
     private String truncate(String in){
         //infinity or large integer, don't want to truncate
         if(in.contains("Infinity") || !in.contains(".")){
