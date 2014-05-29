@@ -34,6 +34,13 @@ public class Calculator implements Parcelable {
             return lastResult;
         }
 
+        //catch NaN
+        if(res.toString().contains("NaN")){
+            resultDisplayState=1;
+            lastResult="NaN";
+            return(res.toString());
+        }
+
         //if the result is an integer, trim off the '.0'
         //remember this as the last result
         if(res.doubleValue()==res.intValue()){
