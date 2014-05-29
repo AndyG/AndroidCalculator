@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
 
         //don't try and load the basic buttons as a fragment if we're in the landscape view.
         //there SEEMS to be a bug with this where sometimes the landscape view will still try and
-        //load these buttons. This try/catch keeps the app from crashing.
+        //load these buttons. This try/catch keeps the app from crashing, but is still ungraceful.
         //TODO: ensure landscape mode never tries to load portrait buttons.
         if(isPortrait()){
             try {
@@ -76,26 +76,6 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         calculator = savedInstanceState.getParcelable("calculator");
         updateDisplays();
         super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        Log.w("menuClick","clicked on the menu");
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     //called after every button press
@@ -276,6 +256,7 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
     }
 
     //stolen and modified from stackoverflow user Tom anMoney :)
+    //makes that spamming the button doesn't add multiple fragments.
     public  void addFragmentOnlyOnce(FragmentManager fragmentManager, Fragment fragment, String tag) {
         // Make sure the current transaction finishes first
         fragmentManager.executePendingTransactions();
