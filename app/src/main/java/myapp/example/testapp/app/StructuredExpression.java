@@ -8,8 +8,18 @@ package myapp.example.testapp.app;
 import java.util.ArrayList;
 
 /**
- * Defines an "expression block" -- a single operator, a single number,
- * or a single parenthesis (open/close).
+ * Defines an "expression block".
+ * blockType will at runtime be one of five values:
+ * -openParen
+ * -closeParen
+ * -operator
+ * -operand
+ * -specialOperand (constant like PI)
+ * -function (sin, cos, etc.)
+ *
+ *
+ *
+ * the blockType of the latest block will be used to decide how to handle each button press.
  */
 class ExpressionBlock{
     public String blockType;
@@ -176,7 +186,7 @@ public class StructuredExpression {
 
         //if the last block is not an operand or is an operand and ends with ),
         //then we are not currently typing a number
-        if(lastBlock.blockType!="operand"){
+        if(!lastBlock.blockType.equals("operand")){
             return false;
         }else if(lastBlock.value.endsWith(")")){
             return false;
@@ -260,7 +270,7 @@ public class StructuredExpression {
     }
 
     //user pressed operator
-    //handle last block cases: empty, operator, operand, open paren, close paren, function
+    //handle last block cases: empty, operator, operand, open paren, close paren, function, specialOperand
     public Boolean handleOperator(String operatorText){
         //handle empty case
         if(expressionArray.isEmpty()){
