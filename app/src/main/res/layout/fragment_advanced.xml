@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/slide_in_background"
-    tools:context="myapp.example.testapp.app.AdvancedFragment"
+    tools:context="myapp.example.testapp.andycalc.AdvancedFragment"
     android:id="@+id/advanced_fragment"
     >
 

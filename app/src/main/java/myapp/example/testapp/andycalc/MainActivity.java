@@ -1,4 +1,4 @@
-package myapp.example.testapp.app;
+package myapp.example.testapp.andycalc;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -35,11 +35,20 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //don't try and load the basic buttons as a fragment if we're in the landscape view.
+        //there SEEMS to be a bug with this where sometimes the landscape view will still try and
+        //load these buttons. This try/catch keeps the app from crashing.
+        //TODO: ensure landscape mode never tries to load portrait buttons.
         if(isPortrait()){
-            BasicFragment basic = new BasicFragment();
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.add(R.id.portrait_bottomhalf,basic);
-            ft.commit();
+            try {
+                BasicFragment basic = new BasicFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.portrait_bottomhalf, basic);
+                ft.commit();
+            }catch(Exception e){
+                e.printStackTrace();
+                Toast.makeText(this,"error loading buttons, try again.",Toast.LENGTH_LONG).show();
+            }
         }
 
         //this is kind of a hack that works because there is only one fragment ever on the backstack.

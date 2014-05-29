@@ -1,4 +1,4 @@
-package myapp.example.testapp.app;
+package myapp.example.testapp.andycalc;
 import android.os.Parcel;
 import android.os.Parcelable;
 
