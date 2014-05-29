@@ -122,10 +122,11 @@ public class StructuredExpression {
 
         ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
         if(lastBlock.blockType.equals("operand")){
-            //make sure
             //multiply this operand by -1
             Double val = null;
             try {
+                //this call to removeParentheses is not necessary at this point.
+                //TODO: remove after stable release (interview :))
                 val = Double.parseDouble(removeParentheses(lastBlock.value));
             }catch(NumberFormatException e){
                 //failed to convert operand to double, return false
@@ -146,6 +147,9 @@ public class StructuredExpression {
         }
     }
 
+    //this is different from negateOperand because we don't want to actually multiply -- prepending or removing
+    //the negative sign is good enough.
+    //TODO: consider, is it really necessary to multiply for normal operands either?
     public Boolean negateSpecialOperand(){
         if(expressionArray.isEmpty()){
             System.out.println("can't negate empty expression");
@@ -154,7 +158,6 @@ public class StructuredExpression {
 
         ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
         if(lastBlock.blockType.equals("specialOperand")){
-            //make sure
             //multiply this operand by -1
             String val = lastBlock.value;
             if(val.startsWith("-")){
@@ -176,24 +179,6 @@ public class StructuredExpression {
         return(s.replace(")",""));
     }
 
-    //for use when I have parentheses
-    public Boolean currentlyTypingNumber(){
-        if(expressionArray.isEmpty()){
-            return false;
-        }
-
-        ExpressionBlock lastBlock = expressionArray.get(expressionArray.size()-1);
-
-        //if the last block is not an operand or is an operand and ends with ),
-        //then we are not currently typing a number
-        if(!lastBlock.blockType.equals("operand")){
-            return false;
-        }else if(lastBlock.value.endsWith(")")){
-            return false;
-        }else{
-            return true;
-        }
-    }
 
     //for use when I have parentheses
     public Boolean currentlyTypingSpecialOperand(){
@@ -339,13 +324,16 @@ public class StructuredExpression {
                 openParensCount--;
             }
             expressionArray.remove(expressionArray.size() - 1);
-        }else if(lastBlock.blockType.equals("function")){
+        }
+        //get rid of whole function if we're backspacing on a function
+        else if(lastBlock.blockType.equals("function")){
             expressionArray.remove(expressionArray.size()-1);
         }
-        //backspaced on operand and just have negative sign left
+        //backspaced on operand and just have negative sign left, get rid of whole operand
         else if(lastBlock.blockType.equals("operand") && val.equals("-")){
             expressionArray.remove(expressionArray.size() - 1);
         }
+        //get rid of entire specialOperand (including negative sign, if it's there)
         else if(lastBlock.blockType.equals("specialOperand")){
             expressionArray.remove(expressionArray.size() - 1);
         }
