@@ -1,15 +1,12 @@
 package myapp.example.testapp.andycalc;
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import net.sourceforge.jeval.*;
+import net.sourceforge.jeval.EvaluationException;
+import net.sourceforge.jeval.Evaluator;
 
 
 /**
  * This is the class for the calculator's functionality and members.
  */
-public class Calculator implements Parcelable {
-
+public class Calculator {
 
     private String lastResult;
     private Integer resultDisplayState = 0;//0 for none, 1 for invalid, 2 for valid
@@ -20,7 +17,7 @@ public class Calculator implements Parcelable {
      */
     private String evaluateCurrentExpression(){
         Evaluator brain = new Evaluator();
-        Double res = null;
+        Double res;
 
         //attempt to evaluate -- if the expression is invalid, return null.
         try {
@@ -167,45 +164,6 @@ public class Calculator implements Parcelable {
         lastResult=null;
         currentStructuredExpression = new StructuredExpression();
     }
-
-    //required by Parcelable
-    public int describeContents(){
-       return 0;
-    }
-
-    public void writeToParcel(Parcel out, int flags)
-    {
-        System.out.println("Writing to parcel. resultDisplayState: "+resultDisplayState);
-        out.writeString(lastResult);
-        out.writeInt(resultDisplayState);
-        out.writeStringArray(currentStructuredExpression.toStringArray());
-    }
-
-
-    public class MyCreator implements Parcelable.Creator<Calculator> {
-        public Calculator createFromParcel(Parcel source) {
-            return new Calculator(source);
-        }
-        public Calculator[] newArray(int size) {
-            return new Calculator[size];
-        }
-    }
-    /**
-     * This will be used only by the MyCreator
-     * @param source
-     */
-    public Calculator(Parcel source){
-        /*
-         * Reconstruct from the Parcel
-         */
-        lastResult = source.readString();
-        resultDisplayState=source.readInt();
-        String [] structuredExprArray = source.createStringArray();
-        currentStructuredExpression = new StructuredExpression(structuredExprArray);
-        System.out.println("Read from parcel. resultDisplayState: "+resultDisplayState);
-    }
-
-
 
     //truncate AFTER decimal on non-scientific notation input
     //this function is here instead of MainActivity so the truncated values can be used as the operands

@@ -5,14 +5,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,8 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements BasicFragment.OnFragmentInteractionListener,
-        Container.OnFragmentInteractionListener, AdvancedFragment.OnFragmentInteractionListener{
+public class MainActivity extends Activity {
 
     private int BUTTON_VIB_LENGTH=1;
     private Vibrator myVib;
@@ -57,25 +52,11 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
         getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         myVib = (Vibrator)this.getSystemService(VIBRATOR_SERVICE);
-        Log.w("debugMessage", "created main activity");
         currentExpressionDisplay = (TextView)findViewById(R.id.currentExpressionDisplay);
         resultDisplay = (TextView)findViewById(R.id.resultDisplay);
         resultDisplay.setVisibility(View.GONE);
         calculator = new Calculator();
         updateDisplays();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState){
-        outState.putParcelable("calculator",calculator);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState){
-        calculator = savedInstanceState.getParcelable("calculator");
-        updateDisplays();
-        super.onRestoreInstanceState(savedInstanceState);
     }
 
     //called after every button press
@@ -271,10 +252,6 @@ public class MainActivity extends Activity implements BasicFragment.OnFragmentIn
             transaction.addToBackStack(tag);
             transaction.commit();
         }
-    }
-
-    //necessary implementation
-    public void onFragmentInteraction(Uri uri){
     }
 
     private Boolean isPortrait(){
